@@ -4,6 +4,8 @@ lock '3.4.0'
 set :application, 'brandedbyjotto.com'
 set :repo_url, 'git@github.com:joebuhlig/brandedbyjotto.git'
 
+set :tmp_dir, "/home/joebuhlig/tmp"
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
