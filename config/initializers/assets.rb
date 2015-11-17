@@ -9,3 +9,10 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w( store/fancybox_sprite.png )
+Rails.application.config.assets.precompile += %w( store/fancybox_loading.gif )
+Rails.application.config.assets.precompile += %w( store/blank.gif )
+Rails.application.config.assets.precompile += %w( store/fancybox_overlay.png )
+Rails.application.config.assets.precompile += %w( select2.png )
+Rails.application.config.assets.precompile += %w( select2-spinner.gif )
+Rails.application.config.assets.precompile += %w( select2x2.png )
