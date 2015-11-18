@@ -29,8 +29,15 @@
     padding: 0px 0px 0px 10px;
 }
 .navbar-brand {
-	height: 100%;
     padding: 5px 20px;
+    max-width:45%;
+}
+.navbar-brand>img{
+	width:100%;
+}
+.navbar-brand.scrolled>img{
+	height: 100%;
+	width:auto;
 }
 .white-logo.scrolled{
 	display:none;
@@ -49,9 +56,6 @@
 	height:100%;
 	margin:0px;
 	padding:0px;
-}
-.navbar-brand > img {
-	height: 100%;
 }
 .nav-title {
 	color:#FFFFFF !important;
@@ -94,6 +98,14 @@
 	background-color: #777777;
 }
 @media (min-width: 768px) {
+	.navbar-brand {
+		height: 100%;
+		max-width:auto;
+	}
+	.navbar-brand>img{
+		height:100%;
+		width:auto;
+	}
 	.navbar-nav {
 		float:right;
 		padding:0px 15px;
