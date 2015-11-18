@@ -1,5 +1,5 @@
 .navbar {
-	height:80px;
+	height:65px;
 }
 .navbar-default{
 	background-color: #FFFFFF;
@@ -44,7 +44,7 @@
 	height: 100%;
 }
 .nav > li > a {
-	padding: 10px;
+	padding: 10px 14px 10px 0px;
 }
 .navbar-collapse {
 	padding:0px;
