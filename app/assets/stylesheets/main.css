@@ -12,7 +12,7 @@
 .navbar-nav {
 	background-color: #FFFFFF;
 	margin:0px;
-	padding: 0px 15px;
+	padding: 0px 25px;
 }
 .navbar-nav > li > a.scrolled {
     margin: 0px;
@@ -44,11 +44,15 @@
 	height: 100%;
 }
 .nav > li > a {
-	padding: 10px 14px 10px 0px;
+	padding: 15px 14px 10px 0px;
 }
 .navbar-collapse {
+	margin:0px;
 	padding:0px;
 	width:100%;
+}
+.navbar-collapse.scrolled{
+	border:0px;
 }
 .navbar-toggle {
 	border: 0px;
@@ -63,6 +67,7 @@
 @media (min-width: 768px) {
 	.navbar-nav {
 		float:right;
+		padding:0px 15px;
 	}
 	.navbar-nav > li > a {
 		margin: 15px 0px;
