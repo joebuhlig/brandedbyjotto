@@ -64,3 +64,4 @@ gem 'spree_reviews', github: 'spree-contrib/spree_reviews', branch: '~> 3-0-stab
 gem "spree_product_zoom", :git => "git://github.com/spree/spree_product_zoom.git", branch: '~> 3-0-stable'
 gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings', branch: '~> 3-0-stable'
 gem 'spree_product_assembly', github: 'spree-contrib/spree-product-assembly', branch: '~> 3-0-stable'
+gem 'spree_wombat', git: 'git@github.com:spree/spree_wombat.git', branch: '~> 3-0-stable'
