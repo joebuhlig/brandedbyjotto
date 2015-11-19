@@ -58,13 +58,15 @@
 	padding:0px;
 }
 .nav-title {
-	color:#FFFFFF !important;
+	color:#777777 !important;
 	font-weight: 300;
 	padding: 15px 14px 10px 0px;
 }
-.nav-title.scrolled {
+.nav-title.unscrolled {
+	color:#FFFFFF !important;
+}
+.navbar-collapse.in .nav-title.unscrolled {
 	color:#777777 !important;
-    margin: 0px;
 }
 .navbar-collapse {
 	margin:0px;
@@ -75,24 +77,22 @@
 	background-color: #FFFFFF;
 	margin:0px !important;
 }
-.navbar-collapse.in .nav-title{
-	color:#777777 !important;
-}
+
 .navbar-collapse.scrolled{
 	border:0px;
 }
 .navbar-toggle {
 	border: 0px;
-	margin:24px 10px;
+	margin: 8px 10px;
 }
 .navbar-toggle:hover, .navbar-toggle:focus {
 	background-color: transparent !important;
 }
-.navbar-toggle.scrolled{
-	margin:9px;
-}
 .navbar-default .navbar-toggle .icon-bar {
     background-color: #FFFFFF;
+}
+.navbar-default .navbar-toggle.unscrolled .icon-bar {
+	background-color: #FFFFFF !important;
 }
 .navbar-default .navbar-toggle.scrolled .icon-bar{
 	background-color: #777777;
@@ -111,8 +111,9 @@
 		padding:0px 15px;
 	}
 	.nav-title {
+		color: #FFFFFF;
 		margin: 8px 0px;
-	    padding: 10px 15px 10px 0px !important;
+	    padding: 8px 15px 10px 0px !important;
 	}
 	.glyphicon-title{
 		display:none;
@@ -124,4 +125,10 @@
 }
 .hero-image, .hero-image img{
 	width:100%;
+}
+#how-it-works{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    top: -75px;
 }
