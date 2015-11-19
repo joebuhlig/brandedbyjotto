@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/joebuhlig/spree_product_personalization.git
-  revision: 043fde78597f5b4c26865c62e554939d63f71455
-  branch: master
-  specs:
-    spree_product_personalization (2.2.0)
-      spree_core (~> 3.1.0.beta)
-
-GIT
   remote: git://github.com/joebuhlig/spree_variant_options.git
   revision: c2ec03fd3812096508bdbf097c75cdfaa850d536
   branch: master
@@ -16,14 +8,6 @@ GIT
       spree_backend (~> 3.1.0.beta)
       spree_core (~> 3.1.0.beta)
       spree_frontend (~> 3.1.0.beta)
-
-GIT
-  remote: git://github.com/spree-contrib/spree-product-assembly.git
-  revision: 
-  branch: ~> 3-0-stable
-  specs:
-    spree_product_assembly (3.0.0)
-      spree_backend (~> 3.0)
 
 GIT
   remote: git://github.com/spree-contrib/spree_mail_settings.git
@@ -451,8 +435,6 @@ DEPENDENCIES
   spree_auth_devise!
   spree_gateway!
   spree_mail_settings!
-  spree_product_assembly!
-  spree_product_personalization!
   spree_product_zoom!
   spree_reviews!
   spree_static_content!
