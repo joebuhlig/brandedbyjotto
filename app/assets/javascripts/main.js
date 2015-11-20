@@ -3,7 +3,7 @@ $(document).on('page:change', function(event) {
 	var topOfContent = $(".navbar").height();
 
 	$(window).scroll(function() {
-	    var topOfWindow = $(window).scrollTop() + $('.navbar').height();
+	    var topOfWindow = $(window).scrollTop() + $('.navbar').height() - 25;
 	    if (topOfContent < topOfWindow) {
 	        scrolled();
 	    }

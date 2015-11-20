@@ -1,3 +1,10 @@
-<div class="container">
-    <%= render :partial => 'spree/shared/main_nav_bar' if store_menu? %>
-</div>
+<% if @home_check %>
+<% else %>
+	<div class="navbar-background">
+		<%= image_tag "cliffbackground.jpg" %>
+		<div class="navbar-background-title" id="navbar-background-top">WELCOME TO THE</div>
+		<div class="navbar-background-title" id="navbar-background-middle">BRANDED BY J.OTTO SHOP</div>
+		<div class="navbar-background-title" id="navbar-background-bottom">LEAVING A MARK THAT MATTERS</div>
+	</div>
+<% end %>
+<%= render :partial => 'spree/shared/main_nav_bar' if store_menu? %>

@@ -1,7 +1,39 @@
+body {
+	font-family: RobotoDraft, Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 .navbar {
 	color:#FFFFFF;
 	height:65px;
 	margin-bottom: 0px;
+}
+.navbar-background{
+	max-height:200px;
+	overflow: hidden;
+}
+.navbar-background > img {
+	margin-top:-175px;
+	width: 100%;
+}
+.navbar-background-title {
+	color: #FFFFFF;
+	left:29px;
+	position:absolute;
+}
+#navbar-background-top{
+	top: 80px;
+    font-weight: 300;
+    font-size: 12px;
+}
+#navbar-background-middle{
+	top: 102px;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: .2em;
+}
+#navbar-background-bottom{
+	top: 140px;
+    font-weight: 100;
+    font-size: 12px;
 }
 .navbar-default{
 	background-color: transparent;
