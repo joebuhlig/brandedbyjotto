@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/joebuhlig/spree_flexi_variants.git
-  revision: db39ffd15f9b7a3d5f3229579f11132fd6cdd87d
+  revision: ce14051104804cee784eece31c7c79f599d5d7af
   branch: master
   specs:
     spree_flexi_variants (2.1.0)
