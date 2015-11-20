@@ -10,3 +10,4 @@
 
 //= require_tree .
 //= require spree/backend/spree_variant_options
+//= require spree/backend/spree_flexi_variants
