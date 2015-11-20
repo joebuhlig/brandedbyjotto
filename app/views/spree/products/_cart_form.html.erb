@@ -25,6 +25,8 @@
     <% else %>
       <%= hidden_field_tag "variant_id", @product.master.id %>
     <% end %>
+    <div data-hook="ad_hoc_options"></div>
+    <div data-hook="personal_customizations"></div>
     <% if @product.price_in(current_currency) and !@product.price.nil? %>
       <div data-hook="product_price" class="col-md-5">
         <div id="product-price">
