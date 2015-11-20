@@ -1,11 +1,11 @@
 module Spree
-   class Gateway::FirstdataE4 < Gateway
+   class Gateway::Payeezy < Gateway
      preference :login, :string
      preference :password, :password
 
 
      def provider_class
-       ActiveMerchant::Billing::FirstdataE4Gateway
+       ActiveMerchant::Billing::Payeezy
      end
    end
 end

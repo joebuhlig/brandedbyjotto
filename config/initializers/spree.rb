@@ -17,4 +17,4 @@ end
 
 Spree.user_class = "Spree::User"
 
-Rails.application.config.spree.payment_methods << Spree::Gateway::FirstdataE4
+Rails.application.config.spree.payment_methods << Spree::Gateway::Payeezy
