@@ -11,8 +11,20 @@ body {
 	overflow: hidden;
 }
 .navbar-background > img {
-	margin-top:-175px;
+	margin-top:-13%;
 	width: 100%;
+}
+@media (max-width: 550px){
+	.navbar-background > img {
+		height: 100%;
+		margin-top: inherit !important;
+		width:inherit;
+	}
+}
+@media (max-width: 768px){
+	.navbar-background > img {
+		margin-top:-5%;
+	}
 }
 .navbar-background-title {
 	color: #FFFFFF;
@@ -28,7 +40,7 @@ body {
 	top: 102px;
     font-size: 24px;
     font-weight: 300;
-    letter-spacing: .2em;
+    letter-spacing: .07em;
 }
 #navbar-background-bottom{
 	top: 140px;
@@ -149,6 +161,9 @@ body {
 	}
 	.glyphicon-title{
 		display:none;
+	}
+	#navbar-background-middle{
+		letter-spacing: 0.2em;
 	}
 }
 .main {
