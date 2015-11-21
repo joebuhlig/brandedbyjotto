@@ -7,7 +7,7 @@ body {
 	margin-bottom: 0px;
 }
 .navbar-background{
-	max-height:200px;
+	height:200px;
 	overflow: hidden;
 }
 .navbar-background > img {
