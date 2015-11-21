@@ -67,4 +67,4 @@ gem 'spree_wombat', git: 'git@github.com:spree/spree_wombat.git', branch: '~> 3-
 gem 'spree_flexi_variants', github: 'joebuhlig/spree_flexi_variants', branch: 'master'
 gem 'spree_variant_options', github: 'joebuhlig/spree_variant_options', branch: 'master'
 gem 'activemerchant'
-gem 'payeezy'
+gem 'braintree'

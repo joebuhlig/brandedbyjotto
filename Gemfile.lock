@@ -201,6 +201,8 @@ GEM
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
+    braintree (2.55.0)
+      builder (>= 2.0.0)
     builder (3.2.2)
     byebug (8.2.0)
     camertron-eprun (1.1.0)
@@ -257,8 +259,6 @@ GEM
       warden (~> 1.2.3)
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
-    domain_name (0.5.25)
-      unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
     execjs (2.6.0)
     ffaker (2.0.0)
@@ -270,8 +270,6 @@ GEM
       activesupport (>= 4.1.0)
     highline (1.6.21)
     htmlentities (4.3.4)
-    http-cookie (1.0.2)
-      domain_name (~> 0.5)
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -309,7 +307,6 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.0.1)
-    netrc (0.11.0)
     nokogiri (1.6.6.4)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
@@ -320,9 +317,6 @@ GEM
       mime-types
     paranoia (2.1.4)
       activerecord (~> 4.0)
-    payeezy (1.1.0)
-      json (~> 1.8.1)
-      rest-client (~> 1.4)
     pg (0.18.4)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
@@ -372,10 +366,6 @@ GEM
     rdoc (4.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
-    rest-client (1.8.0)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 3.0)
-      netrc (~> 0.7)
     sass (3.4.19)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -428,9 +418,6 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.1)
     versioncake (2.3.1)
       actionpack (>= 3.2)
       activesupport (>= 3.2)
@@ -450,6 +437,7 @@ PLATFORMS
 DEPENDENCIES
   activemerchant
   bootstrap-sass (~> 3.3.5)
+  braintree
   byebug
   capistrano
   capistrano-rails
@@ -459,7 +447,6 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
-  payeezy
   pg
   rails (= 4.2.4)
   sass-rails (~> 5.0)
