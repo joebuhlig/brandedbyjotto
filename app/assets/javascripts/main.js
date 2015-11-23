@@ -1,7 +1,10 @@
 $(document).on('page:change', function(event) {
 
 	var topOfContent = $(".navbar").height();
-
+	$(".spinner-wrapper").hide();
+	$("a").click(function(){
+		$(".spinner-wrapper").fadeIn();
+	})
 	$(window).scroll(function() {
 	    var topOfWindow = $(window).scrollTop() + $('.navbar').height() - 25;
 	    if (topOfContent < topOfWindow) {
