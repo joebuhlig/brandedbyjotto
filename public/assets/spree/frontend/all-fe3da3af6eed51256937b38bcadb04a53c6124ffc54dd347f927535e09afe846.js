@@ -14389,12 +14389,2428 @@ var show_all_variant_images = function() {
 
 
 
+(function($){$.formatCurrency={};$.formatCurrency.regions=[];$.formatCurrency.regions[""]={symbol:"$",positiveFormat:"%s%n",negativeFormat:"(%s%n)",decimalSymbol:".",digitGroupSymbol:",",groupDigits:true};
+$.fn.formatCurrency=function(destination,settings){if(arguments.length==1&&typeof destination!=="string"){settings=destination;destination=false
+}var defaults={name:"formatCurrency",colorize:false,region:"",global:true,roundToDecimalPlace:2,eventOnDecimalsEntered:false};defaults=$.extend(defaults,$.formatCurrency.regions[""]);
+settings=$.extend(defaults,settings);if(settings.region.length>0){settings=$.extend(settings,getRegionOrCulture(settings.region))}settings.regex=generateRegex(settings);
+return this.each(function(){$this=$(this);var num="0";num=$this[$this.is("input, select, textarea")?"val":"html"]();if(num.search("\\(")>=0){num="-"+num
+}if(num===""||(num==="-"&&settings.roundToDecimalPlace===-1)){return}if(isNaN(num)){num=num.replace(settings.regex,"");if(num===""||(num==="-"&&settings.roundToDecimalPlace===-1)){return
+}if(settings.decimalSymbol!="."){num=num.replace(settings.decimalSymbol,".")}if(isNaN(num)){num="0"}}var numParts=String(num).split(".");var isPositive=(num==Math.abs(num));
+var hasDecimals=(numParts.length>1);var decimals=(hasDecimals?numParts[1].toString():"0");var originalDecimals=decimals;num=Math.abs(numParts[0]);
+num=isNaN(num)?0:num;if(settings.roundToDecimalPlace>=0){decimals=parseFloat("1."+decimals);decimals=decimals.toFixed(settings.roundToDecimalPlace);
+if(decimals.substring(0,1)=="2"){num=Number(num)+1}decimals=decimals.substring(2)}num=String(num);if(settings.groupDigits){for(var i=0;i<Math.floor((num.length-(1+i))/3);
+i++){num=num.substring(0,num.length-(4*i+3))+settings.digitGroupSymbol+num.substring(num.length-(4*i+3))}}if((hasDecimals&&settings.roundToDecimalPlace==-1)||settings.roundToDecimalPlace>0){num+=settings.decimalSymbol+decimals
+}var format=isPositive?settings.positiveFormat:settings.negativeFormat;var money=format.replace(/%s/g,settings.symbol);money=money.replace(/%n/g,num);
+var $destination=$([]);if(!destination){$destination=$this}else{$destination=$(destination)}$destination[$destination.is("input, select, textarea")?"val":"html"](money);
+if(hasDecimals&&settings.eventOnDecimalsEntered&&originalDecimals.length>settings.roundToDecimalPlace){$destination.trigger("decimalsEntered",originalDecimals)
+}if(settings.colorize){$destination.css("color",isPositive?"black":"red")}})};$.fn.toNumber=function(settings){var defaults=$.extend({name:"toNumber",region:"",global:true},$.formatCurrency.regions[""]);
+settings=jQuery.extend(defaults,settings);if(settings.region.length>0){settings=$.extend(settings,getRegionOrCulture(settings.region))}settings.regex=generateRegex(settings);
+return this.each(function(){var method=$(this).is("input, select, textarea")?"val":"html";$(this)[method]($(this)[method]().replace("(","(-").replace(settings.regex,""))
+})};$.fn.asNumber=function(settings){var defaults=$.extend({name:"asNumber",region:"",parse:true,parseType:"Float",global:true},$.formatCurrency.regions[""]);
+settings=jQuery.extend(defaults,settings);if(settings.region.length>0){settings=$.extend(settings,getRegionOrCulture(settings.region))}settings.regex=generateRegex(settings);
+settings.parseType=validateParseType(settings.parseType);var method=$(this).is("input, select, textarea")?"val":"html";var num=$(this)[method]();
+num=num?num:"";num=num.replace("(","(-");num=num.replace(settings.regex,"");if(!settings.parse){return num}if(num.length==0){num="0"}if(settings.decimalSymbol!="."){num=num.replace(settings.decimalSymbol,".")
+}return window["parse"+settings.parseType](num)};function getRegionOrCulture(region){var regionInfo=$.formatCurrency.regions[region];if(regionInfo){return regionInfo
+}else{if(/(\w+)-(\w+)/g.test(region)){var culture=region.replace(/(\w+)-(\w+)/g,"$1");return $.formatCurrency.regions[culture]}}return null}function validateParseType(parseType){switch(parseType.toLowerCase()){case"int":return"Int";
+case"float":return"Float";default:throw"invalid parseType"}}function generateRegex(settings){if(settings.symbol===""){return new RegExp("[^\\d"+settings.decimalSymbol+"-]","g")
+}else{var symbol=settings.symbol.replace("$","\\$").replace(".","\\.");return new RegExp(symbol+"|[^\\d"+settings.decimalSymbol+"-]","g")}}})(jQuery);
+//  This file is part of the jQuery formatCurrency Plugin.
+//
+//    The jQuery formatCurrency Plugin is free software: you can redistribute it
+//    and/or modify it under the terms of the GNU General Public License as published 
+//    by the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+
+//    The jQuery formatCurrency Plugin is distributed in the hope that it will
+//    be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+//    of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License along with 
+//    the jQuery formatCurrency Plugin.  If not, see <http://www.gnu.org/licenses/>.
+
+(function($) {
+
+	$.formatCurrency.regions['af-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['am-ET'] = {
+		symbol: 'ETB',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-AE'] = {
+		symbol: 'د.إ.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-BH'] = {
+		symbol: 'د.ب.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-DZ'] = {
+		symbol: 'د.ج.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-EG'] = {
+		symbol: 'ج.م.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-IQ'] = {
+		symbol: 'د.ع.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-JO'] = {
+		symbol: 'د.ا.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-KW'] = {
+		symbol: 'د.ك.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-LB'] = {
+		symbol: 'ل.ل.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-LY'] = {
+		symbol: 'د.ل.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-MA'] = {
+		symbol: 'د.م.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-OM'] = {
+		symbol: 'ر.ع.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-QA'] = {
+		symbol: 'ر.ق.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-SA'] = {
+		symbol: 'ر.س.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-SY'] = {
+		symbol: 'ل.س.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-TN'] = {
+		symbol: 'د.ت.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-YE'] = {
+		symbol: 'ر.ي.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['arn-CL'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['as-IN'] = {
+		symbol: 'ট',
+		positiveFormat: '%n%s',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['az-Cyrl-AZ'] = {
+		symbol: 'ман.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['az-Latn-AZ'] = {
+		symbol: 'man.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ba-RU'] = {
+		symbol: 'һ.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['be-BY'] = {
+		symbol: 'р.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bg-BG'] = {
+		symbol: 'лв',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bn-BD'] = {
+		symbol: '৳',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bn-IN'] = {
+		symbol: 'টা',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bo-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['br-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bs-Cyrl-BA'] = {
+		symbol: 'КМ',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bs-Latn-BA'] = {
+		symbol: 'KM',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ca-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['co-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['cs-CZ'] = {
+		symbol: 'Kč',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['cy-GB'] = {
+		symbol: '£',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['da-DK'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-AT'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-CH'] = {
+		symbol: 'SFr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-DE'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-LI'] = {
+		symbol: 'CHF',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-LU'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['dsb-DE'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['dv-MV'] = {
+		symbol: 'ރ.',
+		positiveFormat: '%n %s',
+		negativeFormat: '%n %s-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['el-GR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-029'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-AU'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-BZ'] = {
+		symbol: 'BZ$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-GB'] = {
+		symbol: '£',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-IE'] = {
+		symbol: '€',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-IN'] = {
+		symbol: 'Rs.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-JM'] = {
+		symbol: 'J$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-MY'] = {
+		symbol: 'RM',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-NZ'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-PH'] = {
+		symbol: 'Php',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-SG'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-TT'] = {
+		symbol: 'TT$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-ZW'] = {
+		symbol: 'Z$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-AR'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-BO'] = {
+		symbol: '$b',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-CL'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-CO'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-CR'] = {
+		symbol: '₡',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-DO'] = {
+		symbol: 'RD$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-EC'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-GT'] = {
+		symbol: 'Q',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-HN'] = {
+		symbol: 'L.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-MX'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-NI'] = {
+		symbol: 'C$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PA'] = {
+		symbol: 'B/.',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PE'] = {
+		symbol: 'S/.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PR'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PY'] = {
+		symbol: 'Gs',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-SV'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-US'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-UY'] = {
+		symbol: '$U',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-VE'] = {
+		symbol: 'Bs',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['et-EE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['eu-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fa-IR'] = {
+		symbol: 'ريال',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '/',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fi-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fil-PH'] = {
+		symbol: 'PhP',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fo-FO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-BE'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-CA'] = {
+		symbol: '$',
+		positiveFormat: '%n %s',
+		negativeFormat: '(%n %s)',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-CH'] = {
+		symbol: 'SFr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-LU'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-MC'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fy-NL'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ga-IE'] = {
+		symbol: '€',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['gl-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['gsw-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['gu-IN'] = {
+		symbol: 'રૂ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ha-Latn-NG'] = {
+		symbol: 'N',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['he-IL'] = {
+		symbol: '₪',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hi-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hr-BA'] = {
+		symbol: 'KM',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hr-HR'] = {
+		symbol: 'kn',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hsb-DE'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hu-HU'] = {
+		symbol: 'Ft',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hy-AM'] = {
+		symbol: 'դր.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['id-ID'] = {
+		symbol: 'Rp',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ig-NG'] = {
+		symbol: 'N',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ii-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['is-IS'] = {
+		symbol: 'kr.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['it-CH'] = {
+		symbol: 'SFr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['it-IT'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['it'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['iu-Cans-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['iu-Latn-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ja-JP'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ja'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ka-GE'] = {
+		symbol: 'Lari',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kk-KZ'] = {
+		symbol: 'Т',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '-',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kl-GL'] = {
+		symbol: 'kr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['km-KH'] = {
+		symbol: '៛',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kn-IN'] = {
+		symbol: 'ರೂ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ko-KR'] = {
+		symbol: '₩',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kok-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ky-KG'] = {
+		symbol: 'сом',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '-',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lb-LU'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lo-LA'] = {
+		symbol: '₭',
+		positiveFormat: '%n%s',
+		negativeFormat: '(%n%s)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lt-LT'] = {
+		symbol: 'Lt',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lv-LV'] = {
+		symbol: 'Ls',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mi-NZ'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mk-MK'] = {
+		symbol: 'ден.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ml-IN'] = {
+		symbol: 'ക',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mn-MN'] = {
+		symbol: '₮',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mn-Mong-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['moh-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mr-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ms-BN'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ms-MY'] = {
+		symbol: 'R',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mt-MT'] = {
+		symbol: 'Lm',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nb-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ne-NP'] = {
+		symbol: 'रु',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nl-BE'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nl-NL'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nn-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nso-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['oc-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['or-IN'] = {
+		symbol: 'ଟ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pa-IN'] = {
+		symbol: 'ਰੁ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pl-PL'] = {
+		symbol: 'zł',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['prs-AF'] = {
+		symbol: '؋',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ps-AF'] = {
+		symbol: '؋',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '٫',
+		digitGroupSymbol: '٬',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pt-BR'] = {
+		symbol: 'R$',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pt-PT'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['qut-GT'] = {
+		symbol: 'Q',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['quz-BO'] = {
+		symbol: '$b',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['quz-EC'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['quz-PE'] = {
+		symbol: 'S/.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['rm-CH'] = {
+		symbol: 'fr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ro-RO'] = {
+		symbol: 'lei',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ru'] = {
+		symbol: ' руб.',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['rw-RW'] = {
+		symbol: 'RWF',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sa-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sah-RU'] = {
+		symbol: 'с.',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['se-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['se-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['se-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['si-LK'] = {
+		symbol: 'රු.',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sk-SK'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sl-SI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sma-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sma-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['smj-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['smj-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['smn-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sms-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sq-AL'] = {
+		symbol: 'Lek',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Cyrl-BA'] = {
+		symbol: 'КМ',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Cyrl-CS'] = {
+		symbol: 'Дин.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Latn-BA'] = {
+		symbol: 'KM',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Latn-CS'] = {
+		symbol: 'Din.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sv-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sv-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sw-KE'] = {
+		symbol: 'S',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['syr-SY'] = {
+		symbol: 'ل.س.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ta-IN'] = {
+		symbol: 'ரூ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['te-IN'] = {
+		symbol: 'రూ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tg-Cyrl-TJ'] = {
+		symbol: 'т.р.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ';',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['th-TH'] = {
+		symbol: '฿',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tk-TM'] = {
+		symbol: 'm.',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tn-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tr-TR'] = {
+		symbol: 'TL',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tt-RU'] = {
+		symbol: 'р.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tzm-Latn-DZ'] = {
+		symbol: 'DZD',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ug-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['uk-UA'] = {
+		symbol: 'грн.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ur-PK'] = {
+		symbol: 'Rs',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['uz-Cyrl-UZ'] = {
+		symbol: 'сўм',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['uz-Latn-UZ'] = {
+		symbol: 'su\'m',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['vi-VN'] = {
+		symbol: '₫',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['wo-SN'] = {
+		symbol: 'XOF',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['xh-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['yo-NG'] = {
+		symbol: 'N',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-CN'] = {
+		symbol: '￥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-HK'] = {
+		symbol: 'HK$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-MO'] = {
+		symbol: 'MOP',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-SG'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-TW'] = {
+		symbol: 'NT$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zu-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+})(jQuery);
+
+
+
+
+
+$(function () {
+  // set up the 'reset' functionality on file uploads
+  $("#cart-form form input[type=file]").each(function () {
+  // make a clone of the original in case the user wants to undo an upload
+    var orig = $(this);
+    var clone = $(orig).clone();
+    attachFileInputSwap(orig, clone);
+  });
+  // image customizations need multipart
+  $("#cart-form form").attr("enctype","multipart/form-data");
+  // $("#cart-form form").validate();
+});
+// 'replacement' is always a pure, empty file input
+function attachFileInputSwap(current, replacement) {
+  $(current).siblings("a").click(function (event) {
+    event.preventDefault();
+    $(current).replaceWith(replacement);
+    // need to reattach
+    var clone = $(replacement).clone();
+    attachFileInputSwap(replacement, clone);
+  });
+}
+;
+/*!
+ * Lightbox v2.8.1
+ * by Lokesh Dhakar
+ *
+ * More info:
+ * http://lokeshdhakar.com/projects/lightbox2/
+ *
+ * Copyright 2007, 2015 Lokesh Dhakar
+ * Released under the MIT license
+ * https://github.com/lokesh/lightbox2/blob/master/LICENSE
+ */
+
+// Uses Node, AMD or browser globals to create a module.
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory(require('jquery'));
+    } else {
+        // Browser globals (root is window)
+        root.lightbox = factory(root.jQuery);
+    }
+}(this, function ($) {
+
+  function Lightbox(options) {
+    this.album = [];
+    this.currentImageIndex = void 0;
+    this.init();
+
+    // options
+    this.options = $.extend({}, this.constructor.defaults);
+    this.option(options);
+  }
+
+  // Descriptions of all options available on the demo site:
+  // http://lokeshdhakar.com/projects/lightbox2/index.html#options
+  Lightbox.defaults = {
+    albumLabel: 'Image %1 of %2',
+    alwaysShowNavOnTouchDevices: false,
+    fadeDuration: 500,
+    fitImagesInViewport: true,
+    // maxWidth: 800,
+    // maxHeight: 600,
+    positionFromTop: 50,
+    resizeDuration: 700,
+    showImageNumberLabel: true,
+    wrapAround: false
+  };
+
+  Lightbox.prototype.option = function(options) {
+    $.extend(this.options, options);
+  };
+
+  Lightbox.prototype.imageCountLabel = function(currentImageNum, totalImages) {
+    return this.options.albumLabel.replace(/%1/g, currentImageNum).replace(/%2/g, totalImages);
+  };
+
+  Lightbox.prototype.init = function() {
+    this.enable();
+    this.build();
+  };
+
+  // Loop through anchors and areamaps looking for either data-lightbox attributes or rel attributes
+  // that contain 'lightbox'. When these are clicked, start lightbox.
+  Lightbox.prototype.enable = function() {
+    var self = this;
+    $('body').on('click', 'a[rel^=lightbox], area[rel^=lightbox], a[data-lightbox], area[data-lightbox]', function(event) {
+      self.start($(event.currentTarget));
+      return false;
+    });
+  };
+
+  // Build html for the lightbox and the overlay.
+  // Attach event handlers to the new DOM elements. click click click
+  Lightbox.prototype.build = function() {
+    var self = this;
+    $('<div id="lightboxOverlay" class="lightboxOverlay"></div><div id="lightbox" class="lightbox"><div class="lb-outerContainer"><div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" /><div class="lb-nav"><a class="lb-prev" href="" ></a><a class="lb-next" href="" ></a></div><div class="lb-loader"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div>').appendTo($('body'));
+
+    // Cache jQuery objects
+    this.$lightbox       = $('#lightbox');
+    this.$overlay        = $('#lightboxOverlay');
+    this.$outerContainer = this.$lightbox.find('.lb-outerContainer');
+    this.$container      = this.$lightbox.find('.lb-container');
+
+    // Store css values for future lookup
+    this.containerTopPadding = parseInt(this.$container.css('padding-top'), 10);
+    this.containerRightPadding = parseInt(this.$container.css('padding-right'), 10);
+    this.containerBottomPadding = parseInt(this.$container.css('padding-bottom'), 10);
+    this.containerLeftPadding = parseInt(this.$container.css('padding-left'), 10);
+
+    // Attach event handlers to the newly minted DOM elements
+    this.$overlay.hide().on('click', function() {
+      self.end();
+      return false;
+    });
+
+    this.$lightbox.hide().on('click', function(event) {
+      if ($(event.target).attr('id') === 'lightbox') {
+        self.end();
+      }
+      return false;
+    });
+
+    this.$outerContainer.on('click', function(event) {
+      if ($(event.target).attr('id') === 'lightbox') {
+        self.end();
+      }
+      return false;
+    });
+
+    this.$lightbox.find('.lb-prev').on('click', function() {
+      if (self.currentImageIndex === 0) {
+        self.changeImage(self.album.length - 1);
+      } else {
+        self.changeImage(self.currentImageIndex - 1);
+      }
+      return false;
+    });
+
+    this.$lightbox.find('.lb-next').on('click', function() {
+      if (self.currentImageIndex === self.album.length - 1) {
+        self.changeImage(0);
+      } else {
+        self.changeImage(self.currentImageIndex + 1);
+      }
+      return false;
+    });
+
+    this.$lightbox.find('.lb-loader, .lb-close').on('click', function() {
+      self.end();
+      return false;
+    });
+  };
+
+  // Show overlay and lightbox. If the image is part of a set, add siblings to album array.
+  Lightbox.prototype.start = function($link) {
+    var self    = this;
+    var $window = $(window);
+
+    $window.on('resize', $.proxy(this.sizeOverlay, this));
+
+    $('select, object, embed').css({
+      visibility: 'hidden'
+    });
+
+    this.sizeOverlay();
+
+    this.album = [];
+    var imageNumber = 0;
+
+    function addToAlbum($link) {
+      self.album.push({
+        link: $link.attr('href'),
+        title: $link.attr('data-title') || $link.attr('title')
+      });
+    }
+
+    // Support both data-lightbox attribute and rel attribute implementations
+    var dataLightboxValue = $link.attr('data-lightbox');
+    var $links;
+
+    if (dataLightboxValue) {
+      $links = $($link.prop('tagName') + '[data-lightbox="' + dataLightboxValue + '"]');
+      for (var i = 0; i < $links.length; i = ++i) {
+        addToAlbum($($links[i]));
+        if ($links[i] === $link[0]) {
+          imageNumber = i;
+        }
+      }
+    } else {
+      if ($link.attr('rel') === 'lightbox') {
+        // If image is not part of a set
+        addToAlbum($link);
+      } else {
+        // If image is part of a set
+        $links = $($link.prop('tagName') + '[rel="' + $link.attr('rel') + '"]');
+        for (var j = 0; j < $links.length; j = ++j) {
+          addToAlbum($($links[j]));
+          if ($links[j] === $link[0]) {
+            imageNumber = j;
+          }
+        }
+      }
+    }
+
+    // Position Lightbox
+    var top  = $window.scrollTop() + this.options.positionFromTop;
+    var left = $window.scrollLeft();
+    this.$lightbox.css({
+      top: top + 'px',
+      left: left + 'px'
+    }).fadeIn(this.options.fadeDuration);
+
+    this.changeImage(imageNumber);
+  };
+
+  // Hide most UI elements in preparation for the animated resizing of the lightbox.
+  Lightbox.prototype.changeImage = function(imageNumber) {
+    var self = this;
+
+    this.disableKeyboardNav();
+    var $image = this.$lightbox.find('.lb-image');
+
+    this.$overlay.fadeIn(this.options.fadeDuration);
+
+    $('.lb-loader').fadeIn('slow');
+    this.$lightbox.find('.lb-image, .lb-nav, .lb-prev, .lb-next, .lb-dataContainer, .lb-numbers, .lb-caption').hide();
+
+    this.$outerContainer.addClass('animating');
+
+    // When image to show is preloaded, we send the width and height to sizeContainer()
+    var preloader = new Image();
+    preloader.onload = function() {
+      var $preloader;
+      var imageHeight;
+      var imageWidth;
+      var maxImageHeight;
+      var maxImageWidth;
+      var windowHeight;
+      var windowWidth;
+
+      $image.attr('src', self.album[imageNumber].link);
+
+      $preloader = $(preloader);
+
+      $image.width(preloader.width);
+      $image.height(preloader.height);
+
+      if (self.options.fitImagesInViewport) {
+        // Fit image inside the viewport.
+        // Take into account the border around the image and an additional 10px gutter on each side.
+
+        windowWidth    = $(window).width();
+        windowHeight   = $(window).height();
+        maxImageWidth  = windowWidth - self.containerLeftPadding - self.containerRightPadding - 20;
+        maxImageHeight = windowHeight - self.containerTopPadding - self.containerBottomPadding - 120;
+
+        // Check if image size is larger then maxWidth|maxHeight in settings
+        if (self.options.maxWidth && self.options.maxWidth < maxImageWidth) {
+          maxImageWidth = self.options.maxWidth;
+        }
+        if (self.options.maxHeight && self.options.maxHeight < maxImageWidth) {
+          maxImageHeight = self.options.maxHeight;
+        }
+
+        // Is there a fitting issue?
+        if ((preloader.width > maxImageWidth) || (preloader.height > maxImageHeight)) {
+          if ((preloader.width / maxImageWidth) > (preloader.height / maxImageHeight)) {
+            imageWidth  = maxImageWidth;
+            imageHeight = parseInt(preloader.height / (preloader.width / imageWidth), 10);
+            $image.width(imageWidth);
+            $image.height(imageHeight);
+          } else {
+            imageHeight = maxImageHeight;
+            imageWidth = parseInt(preloader.width / (preloader.height / imageHeight), 10);
+            $image.width(imageWidth);
+            $image.height(imageHeight);
+          }
+        }
+      }
+      self.sizeContainer($image.width(), $image.height());
+    };
+
+    preloader.src          = this.album[imageNumber].link;
+    this.currentImageIndex = imageNumber;
+  };
+
+  // Stretch overlay to fit the viewport
+  Lightbox.prototype.sizeOverlay = function() {
+    this.$overlay
+      .width($(window).width())
+      .height($(document).height());
+  };
+
+  // Animate the size of the lightbox to fit the image we are showing
+  Lightbox.prototype.sizeContainer = function(imageWidth, imageHeight) {
+    var self = this;
+
+    var oldWidth  = this.$outerContainer.outerWidth();
+    var oldHeight = this.$outerContainer.outerHeight();
+    var newWidth  = imageWidth + this.containerLeftPadding + this.containerRightPadding;
+    var newHeight = imageHeight + this.containerTopPadding + this.containerBottomPadding;
+
+    function postResize() {
+      self.$lightbox.find('.lb-dataContainer').width(newWidth);
+      self.$lightbox.find('.lb-prevLink').height(newHeight);
+      self.$lightbox.find('.lb-nextLink').height(newHeight);
+      self.showImage();
+    }
+
+    if (oldWidth !== newWidth || oldHeight !== newHeight) {
+      this.$outerContainer.animate({
+        width: newWidth,
+        height: newHeight
+      }, this.options.resizeDuration, 'swing', function() {
+        postResize();
+      });
+    } else {
+      postResize();
+    }
+  };
+
+  // Display the image and its details and begin preload neighboring images.
+  Lightbox.prototype.showImage = function() {
+    this.$lightbox.find('.lb-loader').stop(true).hide();
+    this.$lightbox.find('.lb-image').fadeIn('slow');
+
+    this.updateNav();
+    this.updateDetails();
+    this.preloadNeighboringImages();
+    this.enableKeyboardNav();
+  };
+
+  // Display previous and next navigation if appropriate.
+  Lightbox.prototype.updateNav = function() {
+    // Check to see if the browser supports touch events. If so, we take the conservative approach
+    // and assume that mouse hover events are not supported and always show prev/next navigation
+    // arrows in image sets.
+    var alwaysShowNav = false;
+    try {
+      document.createEvent('TouchEvent');
+      alwaysShowNav = (this.options.alwaysShowNavOnTouchDevices) ? true : false;
+    } catch (e) {}
+
+    this.$lightbox.find('.lb-nav').show();
+
+    if (this.album.length > 1) {
+      if (this.options.wrapAround) {
+        if (alwaysShowNav) {
+          this.$lightbox.find('.lb-prev, .lb-next').css('opacity', '1');
+        }
+        this.$lightbox.find('.lb-prev, .lb-next').show();
+      } else {
+        if (this.currentImageIndex > 0) {
+          this.$lightbox.find('.lb-prev').show();
+          if (alwaysShowNav) {
+            this.$lightbox.find('.lb-prev').css('opacity', '1');
+          }
+        }
+        if (this.currentImageIndex < this.album.length - 1) {
+          this.$lightbox.find('.lb-next').show();
+          if (alwaysShowNav) {
+            this.$lightbox.find('.lb-next').css('opacity', '1');
+          }
+        }
+      }
+    }
+  };
+
+  // Display caption, image number, and closing button.
+  Lightbox.prototype.updateDetails = function() {
+    var self = this;
+
+    // Enable anchor clicks in the injected caption html.
+    // Thanks Nate Wright for the fix. @https://github.com/NateWr
+    if (typeof this.album[this.currentImageIndex].title !== 'undefined' &&
+      this.album[this.currentImageIndex].title !== '') {
+      this.$lightbox.find('.lb-caption')
+        .html(this.album[this.currentImageIndex].title)
+        .fadeIn('fast')
+        .find('a').on('click', function(event) {
+          if ($(this).attr('target') !== undefined) {
+            window.open($(this).attr('href'), $(this).attr('target'));
+          } else {
+            location.href = $(this).attr('href');
+          }
+        });
+    }
+
+    if (this.album.length > 1 && this.options.showImageNumberLabel) {
+      var labelText = this.imageCountLabel(this.currentImageIndex + 1, this.album.length);
+      this.$lightbox.find('.lb-number').text(labelText).fadeIn('fast');
+    } else {
+      this.$lightbox.find('.lb-number').hide();
+    }
+
+    this.$outerContainer.removeClass('animating');
+
+    this.$lightbox.find('.lb-dataContainer').fadeIn(this.options.resizeDuration, function() {
+      return self.sizeOverlay();
+    });
+  };
+
+  // Preload previous and next images in set.
+  Lightbox.prototype.preloadNeighboringImages = function() {
+    if (this.album.length > this.currentImageIndex + 1) {
+      var preloadNext = new Image();
+      preloadNext.src = this.album[this.currentImageIndex + 1].link;
+    }
+    if (this.currentImageIndex > 0) {
+      var preloadPrev = new Image();
+      preloadPrev.src = this.album[this.currentImageIndex - 1].link;
+    }
+  };
+
+  Lightbox.prototype.enableKeyboardNav = function() {
+    $(document).on('keyup.keyboard', $.proxy(this.keyboardAction, this));
+  };
+
+  Lightbox.prototype.disableKeyboardNav = function() {
+    $(document).off('.keyboard');
+  };
+
+  Lightbox.prototype.keyboardAction = function(event) {
+    var KEYCODE_ESC        = 27;
+    var KEYCODE_LEFTARROW  = 37;
+    var KEYCODE_RIGHTARROW = 39;
+
+    var keycode = event.keyCode;
+    var key     = String.fromCharCode(keycode).toLowerCase();
+    if (keycode === KEYCODE_ESC || key.match(/x|o|c/)) {
+      this.end();
+    } else if (key === 'p' || keycode === KEYCODE_LEFTARROW) {
+      if (this.currentImageIndex !== 0) {
+        this.changeImage(this.currentImageIndex - 1);
+      } else if (this.options.wrapAround && this.album.length > 1) {
+        this.changeImage(this.album.length - 1);
+      }
+    } else if (key === 'n' || keycode === KEYCODE_RIGHTARROW) {
+      if (this.currentImageIndex !== this.album.length - 1) {
+        this.changeImage(this.currentImageIndex + 1);
+      } else if (this.options.wrapAround && this.album.length > 1) {
+        this.changeImage(0);
+      }
+    }
+  };
+
+  // Closing time. :-(
+  Lightbox.prototype.end = function() {
+    this.disableKeyboardNav();
+    $(window).off('resize', this.sizeOverlay);
+    this.$lightbox.fadeOut(this.options.fadeDuration);
+    this.$overlay.fadeOut(this.options.fadeDuration);
+    $('select, object, embed').css({
+      visibility: 'visible'
+    });
+  };
+
+  return new Lightbox();
+}));
 // This is a manifest file that'll be compiled into including all the files listed below.
 // Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
 // be included in the compiled file accessible from http://example.com/assets/application.js
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
+
+
 
 
 

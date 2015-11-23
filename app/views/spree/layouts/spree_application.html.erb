@@ -11,7 +11,16 @@
     <%= render partial: 'spree/shared/google_analytics.js' %>
     <%= render partial: 'spree/shared/header' %>
     <%= flash_messages %>
-    <%= yield %>
-    <%= yield :templates %>
+    <% if @home_check %>
+    <% else %>
+      <div id="main">
+    <% end %>
+      <%= yield %>
+      <%= yield :templates %>
+
+    <% if @home_check %>
+    <% else %>
+      </div>
+    <% end %>
   </body>
 </html>

@@ -14081,12 +14081,2300 @@ var Query=function(a){"use strict";var b=function(a){var b=[],c,d,e,f;if(typeof 
 
 
 
+var show_variant_images = function(variants_ids) {
+  if (typeof(variants_ids) == 'number') {
+    variants_ids = [variants_ids]
+  }
+
+  $('li.vtmb').hide();
+  $(variants_ids).each(function(index, variant_id){
+    $('li.tmb-' + variant_id).show();
+
+    var currentThumb = $('.vtmb.selected');
+
+    // if currently selected thumb does not belong to current variant, nor to common images,
+    // hide it and select the first available thumb instead.
+    if(!currentThumb.hasClass('vtmb-' + variant_id)) {
+      //var thumb = $($('ul.thumbnails li:visible').eq(0));
+      var thumb = $($("ul.thumbnails li.tmb-" + variant_id + ":first").eq(0));
+      if (thumb.length == 0) {
+        thumb = $($('ul.thumbnails li:visible').eq(0));
+      }
+      var newImg = thumb.find('a').attr('href');
+      $('ul.thumbnails li').removeClass('selected');
+      thumb.addClass('selected');
+      $('#main-image img').attr('src', newImg);
+      $("#main-image").data('selectedThumb', newImg);
+      $("#main-image").data('selectedThumbId', thumb.attr('id'));
+    }
+  });
+}
+
+var show_all_variant_images = function() {
+  $('li.vtmb').show();
+}
+;
+// $.keys = function(obj){
+//   var a = [];
+//   $.each(obj, function(k){ a.push(k) });
+//   return a;
+// };
+
+// $.urlParam = function(name){
+//     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+//     if (results==null){
+//        return null;
+//     }
+//     else{
+//        return results[1] || 0;
+//     }
+// }
+
+// if (!Array.indexOf) Array.prototype.indexOf = function(obj) {
+//   for(var i = 0; i < this.length; i++){
+//     if(this[i] == obj) {
+//       return i;
+//     }
+//   }
+//   return -1;
+// }
+
+// if (!Array.find_matches) Array.find_matches = function(a) {
+//   var i, m = [];
+//   a = a.sort();
+//   i = a.length
+//   while(i--) {
+//     if (a[i - 1] == a[i]) {
+//       m.push(a[i]);
+//     }
+//   }
+//   if (m.length == 0) {
+//     return false;
+//   }
+//   return m;
+// }
+
+// function VariantOptions(params) {
+
+//   var options = params['options'];
+//   var i18n = params['i18n'];
+//   var allow_backorders = !params['track_inventory_levels'];
+//   var allow_select_outofstock = params['allow_select_outofstock'];
+//   var default_instock = params['default_instock'];
+
+//   var variant, divs, parent, index = 0;
+//   var selection = [];
+//   var buttons;
+
+
+//   function init() {
+//     divs = $('#product-variants .variant-options');
+//     disable(divs.find('a.option-value').addClass('locked'));
+//     update();
+//     enable(parent.find('a.option-value'));
+//     toggle();
+//     $('div.variant-options a.clear-button').hide().click(handle_clear);
+
+//     if (default_instock) {
+//       divs.each(function(){
+//         $(this).find("ul.variant-option-values li a.in-stock:first").click();
+//       });
+//     }
+//   }
+
+//   function get_index(parent) {
+//     return parseInt($(parent).attr('class').replace(/[^\d]/g, ''));
+//   }
+
+//   function update(i) {
+//     index = isNaN(i) ? index : i;
+//     parent = $(divs.get(index));
+//     buttons = parent.find('a.option-value');
+//     parent.find('a.clear-button').hide();
+//   }
+
+//   function disable(btns) {
+//     return btns.removeClass('selected');
+//   }
+
+//   function enable(btns) {
+//     bt = btns.not('.unavailable').removeClass('locked').unbind('click')
+//     if (!allow_select_outofstock && !allow_backorders)
+//       bt = bt.filter('.in-stock')
+//     return bt.click(handle_click).filter('.auto-click').removeClass('auto-click').click();
+//   }
+
+//   function advance() {
+//     index++
+//     update();
+//     inventory(buttons.removeClass('locked'));
+//     enable(buttons);
+//   }
+
+//   function inventory(btns) {
+//     var keys, variants, selected = {};
+//     var sels = $.map(divs.find('a.selected'), function(i) { return i.rel });
+//     $.each(sels, function(key, value) {
+//       key = value.split('-');
+//       var v = options[key[0]][key[1]];
+//       keys = $.keys(v);
+//       var m = Array.find_matches(selection.concat(keys));
+//       if (selection.length == 0) {
+//         selection = keys;
+//       } else if (m) {
+//         selection = m;
+//       }
+//     });
+//     btns.removeClass('in-stock out-of-stock unavailable').each(function(i, element) {
+//       var variants = get_variant_objects(element.rel);
+//       var keys = $.keys(variants);
+//       if (keys.length == 0) {
+//         disable($(element).addClass('unavailable locked').unbind('click'));
+//       } else if (keys.length == 1) {
+//         _var = variants[keys[0]];
+//         $(element).addClass(_var.in_stock ? selection.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
+//       } else if (allow_backorders) {
+//         $(element).addClass('in-stock');
+//       } else {
+//         var count = 0;
+//         $.each(variants, function(key, value) {
+//           count += value.in_stock ? 1 : 0
+//         });
+//         $(element).addClass(count > 0 ? 'in-stock' : 'out-of-stock');
+//       }
+//     });
+//   }
+
+//   function get_variant_objects(rels) {
+//     var i, ids, obj, variants = {};
+//     if (typeof(rels) == 'string') { rels = [rels]; }
+//     var otid, ovid, opt, opv;
+//     i = rels.length;
+//     try {
+//       while (i--) {
+//         ids = rels[i].split('-');
+//         otid = ids[0];
+//         ovid = ids[1];
+//         opt = options[otid];
+//         if (opt) {
+//           opv = opt[ovid];
+//           ids = $.keys(opv);
+//           if (opv && ids.length) {
+//             var j = ids.length;
+//             while (j--) {
+//               obj = opv[ids[j]];
+//               if (obj && $.keys(obj).length && 0 <= selection.indexOf(obj.id.toString())) {
+//                 variants[obj.id] = obj;
+//               }
+//             }
+//           }
+//         }
+//       }
+//     } catch(error) {
+//       //console.log(error);
+//     }
+//     return variants;
+//   }
+
+//   function to_f(string) {
+//     return string ? parseFloat(string.replace(/[^\d\.]/g, '')) : 0;
+//   }
+
+//   // Find matching variants for selected option value
+//   // Set price or price range if matching variants have different prices.
+//   function find_variant() {
+//     var selected = divs.find('a.selected');
+//     var variants = get_variant_objects(selected.get(0).rel);
+//     if (selected.length == divs.length) {
+//       return variant = variants[selection[0]];
+//     } else {
+//       var prices = [];
+//       $.each(variants, function(key, value) { prices.push(value.price) });
+//       prices = $.unique(prices).sort(function(a, b) {
+//         return to_f(a) < to_f(b) ? -1 : 1;
+//       });
+//       if (prices.length == 1) {
+//         $('#product-price .price').html('<span class="price assumed">' + prices[0] + '</span>');
+//       } else {
+//         $('#product-price .price').html('<span class="price from">' + prices[0] + '</span> - <span class="price to">' + prices[prices.length - 1] + '</span>');
+//       }
+//       return variants;
+//     }
+//   }
+
+//   function toggle(variants) {
+//     if (variant) {
+//       var variant_id = $('#variant_id, form[data-form-type="variant"] input[name$="[variant_id]"]');
+//       variant_id.val(variant.id);
+//       variant_id.first().trigger('change');
+//       $('#product-price .price').removeClass('unselected').text(variant.price);
+//       if (variant.in_stock)
+//         $('#cart-form button[type=submit]').attr('disabled', false).fadeTo(100, 1);
+//       $('form[data-form-type="variant"] button[type=submit]').attr('disabled', false).fadeTo(100, 1);
+//       try {
+//         show_variant_images(variant.id);
+//       } catch(error) {
+//         // depends on modified version of product.js
+//       }
+//     } else {
+
+//       if (variants) {
+//         variants_ids = $.keys(variants);
+//         show_variant_images(variants_ids.slice(0, 1));
+//       }
+
+//       $('#variant_id, form[data-form-type="variant"] input[name$="[variant_id]"]').val('');
+//       $('#cart-form button[type=submit], form[data-form-type="variant"] button[type=submit]').attr('disabled', true).fadeTo(0, 0.5);
+//       price = $('#product-price .price').addClass('unselected')
+//       // Replace product price by "(select)" only when there are at least 1 variant not out-of-stock
+//       variants = $("div.variant-options.index-0")
+//       if (variants.find("a.option-value.out-of-stock").length != variants.find("a.option-value").length)
+//         price.text(i18n.variant_options_select);
+//     }
+//   }
+
+//   function clear(i) {
+//     variant = null;
+//     update(i);
+//     enable(buttons.removeClass('selected'));
+//     toggle();
+//     parent.nextAll().each(function(index, element) {
+//       disable($(element).find('a.option-value').show().removeClass('in-stock out-of-stock').addClass('locked').unbind('click'));
+//       $(element).find('a.clear-button').hide();
+//       $(element).find('h6 strong.selection').html('').removeClass('out-of-stock');
+//     });
+//     parent.find('strong.selection').html('').removeClass('out-of-stock');
+//     show_all_variant_images();
+//   }
+
+
+//   function handle_clear(evt) {
+//     evt.preventDefault();
+//     clear(get_index(this));
+//   }
+
+//   function handle_click(evt) {
+//     evt.preventDefault();
+//     variant = null;
+//     selection = [];
+//     var a = $(this);
+//     if (!parent.has(a).length) {
+//       window.history.pushState("object or string", "Title", window.location.origin + window.location.pathname + "?color=" + a.attr("title"));
+//       clear(divs.index(a.parents('.variant-options:first')));
+//     }
+//     disable(buttons);
+//     var a = enable(a.addClass('selected'));
+//     parent.find('a.clear-button').css('display', 'inline-block');
+//     advance();
+//     handle_selected();
+//     variants = find_variant();
+//     toggle(variants);
+//   }
+
+//   function handle_selected() {
+//     var selected = divs.find('a.selected');
+//     selected.each(function(){
+//       $this = $(this)
+//       var selection = $this.parents('.variant-options').find('h6 strong.selection')
+//       selection.html($this.attr('title'));
+
+//       if ($this.hasClass('out-of-stock'))
+//         selection.addClass('out-of-stock').attr('title', i18n.out_of_stock);
+//     });
+//   };
+//   $(document).ready(init);
+
+// };
+
+
+
+
+(function($){$.formatCurrency={};$.formatCurrency.regions=[];$.formatCurrency.regions[""]={symbol:"$",positiveFormat:"%s%n",negativeFormat:"(%s%n)",decimalSymbol:".",digitGroupSymbol:",",groupDigits:true};
+$.fn.formatCurrency=function(destination,settings){if(arguments.length==1&&typeof destination!=="string"){settings=destination;destination=false
+}var defaults={name:"formatCurrency",colorize:false,region:"",global:true,roundToDecimalPlace:2,eventOnDecimalsEntered:false};defaults=$.extend(defaults,$.formatCurrency.regions[""]);
+settings=$.extend(defaults,settings);if(settings.region.length>0){settings=$.extend(settings,getRegionOrCulture(settings.region))}settings.regex=generateRegex(settings);
+return this.each(function(){$this=$(this);var num="0";num=$this[$this.is("input, select, textarea")?"val":"html"]();if(num.search("\\(")>=0){num="-"+num
+}if(num===""||(num==="-"&&settings.roundToDecimalPlace===-1)){return}if(isNaN(num)){num=num.replace(settings.regex,"");if(num===""||(num==="-"&&settings.roundToDecimalPlace===-1)){return
+}if(settings.decimalSymbol!="."){num=num.replace(settings.decimalSymbol,".")}if(isNaN(num)){num="0"}}var numParts=String(num).split(".");var isPositive=(num==Math.abs(num));
+var hasDecimals=(numParts.length>1);var decimals=(hasDecimals?numParts[1].toString():"0");var originalDecimals=decimals;num=Math.abs(numParts[0]);
+num=isNaN(num)?0:num;if(settings.roundToDecimalPlace>=0){decimals=parseFloat("1."+decimals);decimals=decimals.toFixed(settings.roundToDecimalPlace);
+if(decimals.substring(0,1)=="2"){num=Number(num)+1}decimals=decimals.substring(2)}num=String(num);if(settings.groupDigits){for(var i=0;i<Math.floor((num.length-(1+i))/3);
+i++){num=num.substring(0,num.length-(4*i+3))+settings.digitGroupSymbol+num.substring(num.length-(4*i+3))}}if((hasDecimals&&settings.roundToDecimalPlace==-1)||settings.roundToDecimalPlace>0){num+=settings.decimalSymbol+decimals
+}var format=isPositive?settings.positiveFormat:settings.negativeFormat;var money=format.replace(/%s/g,settings.symbol);money=money.replace(/%n/g,num);
+var $destination=$([]);if(!destination){$destination=$this}else{$destination=$(destination)}$destination[$destination.is("input, select, textarea")?"val":"html"](money);
+if(hasDecimals&&settings.eventOnDecimalsEntered&&originalDecimals.length>settings.roundToDecimalPlace){$destination.trigger("decimalsEntered",originalDecimals)
+}if(settings.colorize){$destination.css("color",isPositive?"black":"red")}})};$.fn.toNumber=function(settings){var defaults=$.extend({name:"toNumber",region:"",global:true},$.formatCurrency.regions[""]);
+settings=jQuery.extend(defaults,settings);if(settings.region.length>0){settings=$.extend(settings,getRegionOrCulture(settings.region))}settings.regex=generateRegex(settings);
+return this.each(function(){var method=$(this).is("input, select, textarea")?"val":"html";$(this)[method]($(this)[method]().replace("(","(-").replace(settings.regex,""))
+})};$.fn.asNumber=function(settings){var defaults=$.extend({name:"asNumber",region:"",parse:true,parseType:"Float",global:true},$.formatCurrency.regions[""]);
+settings=jQuery.extend(defaults,settings);if(settings.region.length>0){settings=$.extend(settings,getRegionOrCulture(settings.region))}settings.regex=generateRegex(settings);
+settings.parseType=validateParseType(settings.parseType);var method=$(this).is("input, select, textarea")?"val":"html";var num=$(this)[method]();
+num=num?num:"";num=num.replace("(","(-");num=num.replace(settings.regex,"");if(!settings.parse){return num}if(num.length==0){num="0"}if(settings.decimalSymbol!="."){num=num.replace(settings.decimalSymbol,".")
+}return window["parse"+settings.parseType](num)};function getRegionOrCulture(region){var regionInfo=$.formatCurrency.regions[region];if(regionInfo){return regionInfo
+}else{if(/(\w+)-(\w+)/g.test(region)){var culture=region.replace(/(\w+)-(\w+)/g,"$1");return $.formatCurrency.regions[culture]}}return null}function validateParseType(parseType){switch(parseType.toLowerCase()){case"int":return"Int";
+case"float":return"Float";default:throw"invalid parseType"}}function generateRegex(settings){if(settings.symbol===""){return new RegExp("[^\\d"+settings.decimalSymbol+"-]","g")
+}else{var symbol=settings.symbol.replace("$","\\$").replace(".","\\.");return new RegExp(symbol+"|[^\\d"+settings.decimalSymbol+"-]","g")}}})(jQuery);
+//  This file is part of the jQuery formatCurrency Plugin.
+//
+//    The jQuery formatCurrency Plugin is free software: you can redistribute it
+//    and/or modify it under the terms of the GNU General Public License as published 
+//    by the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+
+//    The jQuery formatCurrency Plugin is distributed in the hope that it will
+//    be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+//    of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License along with 
+//    the jQuery formatCurrency Plugin.  If not, see <http://www.gnu.org/licenses/>.
+
+(function($) {
+
+	$.formatCurrency.regions['af-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['am-ET'] = {
+		symbol: 'ETB',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-AE'] = {
+		symbol: 'د.إ.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-BH'] = {
+		symbol: 'د.ب.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-DZ'] = {
+		symbol: 'د.ج.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-EG'] = {
+		symbol: 'ج.م.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-IQ'] = {
+		symbol: 'د.ع.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-JO'] = {
+		symbol: 'د.ا.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-KW'] = {
+		symbol: 'د.ك.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-LB'] = {
+		symbol: 'ل.ل.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-LY'] = {
+		symbol: 'د.ل.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-MA'] = {
+		symbol: 'د.م.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-OM'] = {
+		symbol: 'ر.ع.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-QA'] = {
+		symbol: 'ر.ق.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-SA'] = {
+		symbol: 'ر.س.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-SY'] = {
+		symbol: 'ل.س.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-TN'] = {
+		symbol: 'د.ت.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-YE'] = {
+		symbol: 'ر.ي.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['arn-CL'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['as-IN'] = {
+		symbol: 'ট',
+		positiveFormat: '%n%s',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['az-Cyrl-AZ'] = {
+		symbol: 'ман.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['az-Latn-AZ'] = {
+		symbol: 'man.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ba-RU'] = {
+		symbol: 'һ.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['be-BY'] = {
+		symbol: 'р.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bg-BG'] = {
+		symbol: 'лв',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bn-BD'] = {
+		symbol: '৳',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bn-IN'] = {
+		symbol: 'টা',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bo-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['br-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bs-Cyrl-BA'] = {
+		symbol: 'КМ',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bs-Latn-BA'] = {
+		symbol: 'KM',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ca-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['co-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['cs-CZ'] = {
+		symbol: 'Kč',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['cy-GB'] = {
+		symbol: '£',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['da-DK'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-AT'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-CH'] = {
+		symbol: 'SFr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-DE'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-LI'] = {
+		symbol: 'CHF',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-LU'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['dsb-DE'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['dv-MV'] = {
+		symbol: 'ރ.',
+		positiveFormat: '%n %s',
+		negativeFormat: '%n %s-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['el-GR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-029'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-AU'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-BZ'] = {
+		symbol: 'BZ$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-GB'] = {
+		symbol: '£',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-IE'] = {
+		symbol: '€',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-IN'] = {
+		symbol: 'Rs.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-JM'] = {
+		symbol: 'J$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-MY'] = {
+		symbol: 'RM',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-NZ'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-PH'] = {
+		symbol: 'Php',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-SG'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-TT'] = {
+		symbol: 'TT$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-ZW'] = {
+		symbol: 'Z$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-AR'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-BO'] = {
+		symbol: '$b',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-CL'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-CO'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-CR'] = {
+		symbol: '₡',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-DO'] = {
+		symbol: 'RD$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-EC'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-GT'] = {
+		symbol: 'Q',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-HN'] = {
+		symbol: 'L.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-MX'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-NI'] = {
+		symbol: 'C$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PA'] = {
+		symbol: 'B/.',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PE'] = {
+		symbol: 'S/.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PR'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PY'] = {
+		symbol: 'Gs',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-SV'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-US'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-UY'] = {
+		symbol: '$U',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-VE'] = {
+		symbol: 'Bs',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['et-EE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['eu-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fa-IR'] = {
+		symbol: 'ريال',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '/',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fi-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fil-PH'] = {
+		symbol: 'PhP',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fo-FO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-BE'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-CA'] = {
+		symbol: '$',
+		positiveFormat: '%n %s',
+		negativeFormat: '(%n %s)',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-CH'] = {
+		symbol: 'SFr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-LU'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-MC'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fy-NL'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ga-IE'] = {
+		symbol: '€',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['gl-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['gsw-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['gu-IN'] = {
+		symbol: 'રૂ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ha-Latn-NG'] = {
+		symbol: 'N',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['he-IL'] = {
+		symbol: '₪',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hi-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hr-BA'] = {
+		symbol: 'KM',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hr-HR'] = {
+		symbol: 'kn',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hsb-DE'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hu-HU'] = {
+		symbol: 'Ft',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hy-AM'] = {
+		symbol: 'դր.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['id-ID'] = {
+		symbol: 'Rp',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ig-NG'] = {
+		symbol: 'N',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ii-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['is-IS'] = {
+		symbol: 'kr.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['it-CH'] = {
+		symbol: 'SFr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['it-IT'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['it'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['iu-Cans-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['iu-Latn-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ja-JP'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ja'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ka-GE'] = {
+		symbol: 'Lari',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kk-KZ'] = {
+		symbol: 'Т',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '-',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kl-GL'] = {
+		symbol: 'kr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['km-KH'] = {
+		symbol: '៛',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kn-IN'] = {
+		symbol: 'ರೂ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ko-KR'] = {
+		symbol: '₩',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kok-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ky-KG'] = {
+		symbol: 'сом',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '-',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lb-LU'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lo-LA'] = {
+		symbol: '₭',
+		positiveFormat: '%n%s',
+		negativeFormat: '(%n%s)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lt-LT'] = {
+		symbol: 'Lt',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lv-LV'] = {
+		symbol: 'Ls',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mi-NZ'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mk-MK'] = {
+		symbol: 'ден.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ml-IN'] = {
+		symbol: 'ക',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mn-MN'] = {
+		symbol: '₮',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mn-Mong-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['moh-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mr-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ms-BN'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ms-MY'] = {
+		symbol: 'R',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mt-MT'] = {
+		symbol: 'Lm',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nb-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ne-NP'] = {
+		symbol: 'रु',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nl-BE'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nl-NL'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nn-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nso-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['oc-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['or-IN'] = {
+		symbol: 'ଟ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pa-IN'] = {
+		symbol: 'ਰੁ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pl-PL'] = {
+		symbol: 'zł',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['prs-AF'] = {
+		symbol: '؋',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ps-AF'] = {
+		symbol: '؋',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '٫',
+		digitGroupSymbol: '٬',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pt-BR'] = {
+		symbol: 'R$',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pt-PT'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['qut-GT'] = {
+		symbol: 'Q',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['quz-BO'] = {
+		symbol: '$b',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['quz-EC'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['quz-PE'] = {
+		symbol: 'S/.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['rm-CH'] = {
+		symbol: 'fr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ro-RO'] = {
+		symbol: 'lei',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ru'] = {
+		symbol: ' руб.',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['rw-RW'] = {
+		symbol: 'RWF',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sa-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sah-RU'] = {
+		symbol: 'с.',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['se-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['se-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['se-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['si-LK'] = {
+		symbol: 'රු.',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sk-SK'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sl-SI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sma-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sma-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['smj-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['smj-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['smn-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sms-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sq-AL'] = {
+		symbol: 'Lek',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Cyrl-BA'] = {
+		symbol: 'КМ',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Cyrl-CS'] = {
+		symbol: 'Дин.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Latn-BA'] = {
+		symbol: 'KM',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Latn-CS'] = {
+		symbol: 'Din.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sv-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sv-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sw-KE'] = {
+		symbol: 'S',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['syr-SY'] = {
+		symbol: 'ل.س.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ta-IN'] = {
+		symbol: 'ரூ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['te-IN'] = {
+		symbol: 'రూ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tg-Cyrl-TJ'] = {
+		symbol: 'т.р.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ';',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['th-TH'] = {
+		symbol: '฿',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tk-TM'] = {
+		symbol: 'm.',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tn-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tr-TR'] = {
+		symbol: 'TL',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tt-RU'] = {
+		symbol: 'р.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tzm-Latn-DZ'] = {
+		symbol: 'DZD',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ug-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['uk-UA'] = {
+		symbol: 'грн.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ur-PK'] = {
+		symbol: 'Rs',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['uz-Cyrl-UZ'] = {
+		symbol: 'сўм',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['uz-Latn-UZ'] = {
+		symbol: 'su\'m',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['vi-VN'] = {
+		symbol: '₫',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['wo-SN'] = {
+		symbol: 'XOF',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['xh-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['yo-NG'] = {
+		symbol: 'N',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-CN'] = {
+		symbol: '￥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-HK'] = {
+		symbol: 'HK$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-MO'] = {
+		symbol: 'MOP',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-SG'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-TW'] = {
+		symbol: 'NT$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zu-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+})(jQuery);
+
+
+
+
+
+$(function () {
+  // set up the 'reset' functionality on file uploads
+  $("#cart-form form input[type=file]").each(function () {
+  // make a clone of the original in case the user wants to undo an upload
+    var orig = $(this);
+    var clone = $(orig).clone();
+    attachFileInputSwap(orig, clone);
+  });
+  // image customizations need multipart
+  $("#cart-form form").attr("enctype","multipart/form-data");
+  // $("#cart-form form").validate();
+});
+// 'replacement' is always a pure, empty file input
+function attachFileInputSwap(current, replacement) {
+  $(current).siblings("a").click(function (event) {
+    event.preventDefault();
+    $(current).replaceWith(replacement);
+    // need to reattach
+    var clone = $(replacement).clone();
+    attachFileInputSwap(replacement, clone);
+  });
+}
+;
+/*!
+	Zoom 1.7.14
+	license: MIT
+	http://www.jacklmoore.com/zoom
+*/
+
+(function($){var defaults={url:false,callback:false,target:false,duration:120,on:"mouseover",touch:true,onZoomIn:false,onZoomOut:false,magnify:1};$.zoom=function(target,source,img,magnify){var targetHeight,targetWidth,sourceHeight,sourceWidth,xRatio,yRatio,offset,$target=$(target),position=$target.css("position"),$source=$(source);$target.css("position",/(absolute|fixed)/.test(position)?position:"relative");$target.css("overflow","hidden");img.style.width=img.style.height="";$(img).addClass("zoomImg").css({position:"absolute",top:0,left:0,opacity:0,width:img.width*magnify,height:img.height*magnify,border:"none",maxWidth:"none",maxHeight:"none"}).appendTo(target);return{init:function(){targetWidth=$target.outerWidth();targetHeight=$target.outerHeight();if(source===$target[0]){sourceWidth=targetWidth;sourceHeight=targetHeight}else{sourceWidth=$source.outerWidth();sourceHeight=$source.outerHeight()}xRatio=(img.width-targetWidth)/sourceWidth;yRatio=(img.height-targetHeight)/sourceHeight;offset=$source.offset()},move:function(e){var left=e.pageX-offset.left,top=e.pageY-offset.top;top=Math.max(Math.min(top,sourceHeight),0);left=Math.max(Math.min(left,sourceWidth),0);img.style.left=left*-xRatio+"px";img.style.top=top*-yRatio+"px"}}};$.fn.zoom=function(options){return this.each(function(){var settings=$.extend({},defaults,options||{}),target=settings.target||this,source=this,$source=$(source),$target=$(target),img=document.createElement("img"),$img=$(img),mousemove="mousemove.zoom",clicked=false,touched=false,$urlElement;if(!settings.url){$urlElement=$source.find("img");if($urlElement[0]){settings.url=$urlElement.data("src")||$urlElement.attr("src")}if(!settings.url){return}}(function(){var position=$target.css("position");var overflow=$target.css("overflow");$source.one("zoom.destroy",function(){$source.off(".zoom");$target.css("position",position);$target.css("overflow",overflow);$img.remove()})})();img.onload=function(){var zoom=$.zoom(target,source,img,settings.magnify);function start(e){zoom.init();zoom.move(e);$img.stop().fadeTo($.support.opacity?settings.duration:0,1,$.isFunction(settings.onZoomIn)?settings.onZoomIn.call(img):false)}function stop(){$img.stop().fadeTo(settings.duration,0,$.isFunction(settings.onZoomOut)?settings.onZoomOut.call(img):false)}if(settings.on==="grab"){$source.on("mousedown.zoom",function(e){if(e.which===1){$(document).one("mouseup.zoom",function(){stop();$(document).off(mousemove,zoom.move)});start(e);$(document).on(mousemove,zoom.move);e.preventDefault()}})}else if(settings.on==="click"){$source.on("click.zoom",function(e){if(clicked){return}else{clicked=true;start(e);$(document).on(mousemove,zoom.move);$(document).one("click.zoom",function(){stop();clicked=false;$(document).off(mousemove,zoom.move)});return false}})}else if(settings.on==="toggle"){$source.on("click.zoom",function(e){if(clicked){stop()}else{start(e)}clicked=!clicked})}else if(settings.on==="mouseover"){zoom.init();$source.on("mouseenter.zoom",start).on("mouseleave.zoom",stop).on(mousemove,zoom.move)}if(settings.touch){$source.on("touchstart.zoom",function(e){e.preventDefault();if(touched){touched=false;stop()}else{touched=true;start(e.originalEvent.touches[0]||e.originalEvent.changedTouches[0])}}).on("touchmove.zoom",function(e){e.preventDefault();zoom.move(e.originalEvent.touches[0]||e.originalEvent.changedTouches[0])})}if($.isFunction(settings.callback)){settings.callback.call(img)}};img.src=settings.url})};$.fn.zoom.defaults=defaults})(window.jQuery);
 // This is a manifest file that'll be compiled into including all the files listed below.
 // Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
 // be included in the compiled file accessible from http://example.com/assets/application.js
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
+
+
+
 
 
 
