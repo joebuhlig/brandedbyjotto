@@ -2,7 +2,7 @@ $(document).on('page:change', function(event) {
 
 	var topOfContent = $(".navbar").height();
 	$(".spinner-wrapper").hide();
-	$("a").click(function(){
+	$("a:not(.dropdown a)").click(function(){
 		$(".spinner-wrapper").fadeIn();
 	})
 	$(window).scroll(function() {
@@ -14,6 +14,9 @@ $(document).on('page:change', function(event) {
 	    	unscrolled();
 	    }
 	});
+	setTimeout(function(){
+		$(".alert").fadeOut();
+	}, 3500);
 });
 
 function scrolled() {
