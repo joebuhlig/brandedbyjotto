@@ -54,10 +54,9 @@ body {
 	font-family: RobotoDraft, Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .row{
-	margin:0px !important;
+	margin:10px 0px !important;
 }
 #main{
-	margin:15px !important;
 	width:100%;
 }
 .alert{
