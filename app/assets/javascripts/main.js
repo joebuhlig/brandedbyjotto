@@ -17,6 +17,23 @@ $(document).on('page:change', function(event) {
 	setTimeout(function(){
 		$(".alert").fadeOut();
 	}, 3500);
+	$(".thumbnail").click(function(){
+		$("#main-image img.product_image").attr('src', $(this).attr('src'));
+	});
+	$("#main-image img.product_image").click(function(){
+		var big_image_src = $(this).attr('src').toString();
+		console.log(big_image_src);
+		big_image_src = big_image_src.replace("large", "original");
+		console.log(big_image_src);
+		$(".image-zoom img").attr('src', big_image_src);
+		$(".image-zoom-original a").attr('href', big_image_src);
+		$(".image-zoom-background").fadeIn();
+		$(".image-zoom-wrapper").fadeIn();
+	});
+	$(".image-zoom, .image-zoom-close").click(function(){
+		$(".image-zoom-background").fadeOut();
+		$(".image-zoom-wrapper").fadeOut();
+	})
 });
 
 function scrolled() {
