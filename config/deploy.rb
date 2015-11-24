@@ -35,6 +35,14 @@ set :tmp_dir, "/home/joebuhlig/tmp"
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+namespace :images do
+  task :symlink do
+		on roles(:web) do
+		    execute "rm -rf #{release_path}/public/spree"
+		    execute "ln -nfs #{shared_path}/spree #{release_path}/public/spree"
+		end
+	end
+end
 
 namespace :deploy do
 
@@ -42,9 +50,11 @@ namespace :deploy do
 		on roles(:web), in: :groups, limit: 3, wait: 10 do
 			# Here we can do anything such as:
 			# within release_path do
-			#   execute :rake, 'cache:clear'
+			# execute "sudo service apache2 restart"
 			# end
 		end
 	end
+
+	after :publishing, "images:symlink"
 
 end
