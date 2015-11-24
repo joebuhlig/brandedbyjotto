@@ -4,6 +4,8 @@
 	</div>
 
 	<div data-hook="homepage_products" class="col-md-10">
-		<%= render :partial => 'spree/shared/products', :locals => { :products => @products } %>
+		<% cache(cache_key_for_products) do %>
+			<%= render :partial => 'spree/shared/products', :locals => { :products => @products } %>
+		<% end %>
 	</div>
 </div>
