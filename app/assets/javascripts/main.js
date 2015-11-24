@@ -5,6 +5,9 @@ $(document).on('page:change', function(event) {
 	$("a:not(.exclude-spinner, .exclude-spinner a)").click(function(){
 		$(".spinner-wrapper").fadeIn();
 	})
+	$(".spinner-wrapper").click(function(){
+		$(".spinner-wrapper").fadeOut();
+	})
 	$(window).scroll(function() {
 	    var topOfWindow = $(window).scrollTop() + $('.navbar').height() - 25;
 	    if (topOfContent < topOfWindow) {
