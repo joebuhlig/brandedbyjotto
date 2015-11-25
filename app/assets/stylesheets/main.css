@@ -551,6 +551,10 @@ a {
 	cursor:pointer;
     width: 100%;
 }
+.rate-name {
+    color: #777;
+    padding-left: 10px;
+}
 #product-thumbnails{
 	margin-left:0px;
 }
