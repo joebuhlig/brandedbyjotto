@@ -138,6 +138,46 @@
                         
                         <td valign="middle" style="padding-top:9px;padding-left:18px;padding-bottom:9px;padding-right:18px">
                         
+                            <table border="0" cellpadding="18" cellspacing="0" width="100%" style="min-width:100%!important;border-collapse:collapse;text-align:center;">
+                                <tbody>
+                                <tr>
+                                  <td colspan="2"><strong style="color:#b2bb1c;">Email: </strong><%= @order.email %></td>
+                                </tr>
+                                <tr>
+                                  <td style="font-family:Helvetica;font-size:16px;font-weight:normal;text-align:center;word-break:break-word;line-height:150%;color:#b2bb1c;">Billing Address</td>
+                                  <td style="font-family:Helvetica;font-size:16px;font-weight:normal;text-align:center;word-break:break-word;line-height:150%;color:#b2bb1c;">Shipping Address</td>
+                                </tr>
+                                <tr>
+                                    <td valign="middle" style="font-family:Helvetica;font-size:16px;font-weight:normal;text-align:center;word-break:break-word;line-height:150%">
+                                        <%= @order.bill_address.firstname %> <%= @order.bill_address.lastname %><br/><%= @order.bill_address.address1 %><br/><% if @order.bill_address.address2.present? %><%= @order.bill_address.address2 %><br/><% end %><%= @order.bill_address.city %>, <%= @order.bill_address.state.abbr %> <%= @order.bill_address.zipcode %><br/><%= @order.bill_address.phone %>
+                                    </td>
+                                    <td valign="middle" style="font-family:Helvetica;font-size:16px;font-weight:normal;text-align:center;word-break:break-word;line-height:150%">
+                                        <%= @order.ship_address.firstname %> <%= @order.ship_address.lastname %><br/><%= @order.ship_address.address1 %><br/><% if @order.ship_address.address2.present? %><%= @order.ship_address.address2 %><br/><% end %><%= @order.ship_address.city %>, <%= @order.ship_address.state.abbr %> <%= @order.ship_address.zipcode %><br/><%= @order.ship_address.phone %>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                    </tr>
+                </tbody></table>
+        
+                
+        
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;border-collapse:collapse;">
+    
+  <tbody>
+        <tr>
+            <td valign="middle">
+                
+        
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;border-collapse:collapse">
+                    <tbody><tr>
+                        
+                        <td valign="middle" style="padding-top:9px;padding-left:18px;padding-bottom:9px;padding-right:18px">
+                        
                             <table border="0" cellpadding="18" cellspacing="0" width="100%" style="min-width:100%!important;border-collapse:collapse">
                                 <tbody><tr>
                                     <td valign="middle" style="font-family:Helvetica;font-size:24px;font-weight:normal;text-align:center;word-break:break-word;line-height:150%">
