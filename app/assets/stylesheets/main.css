@@ -577,7 +577,7 @@ h6.variant-option-type strong.selection {
 .footer a {
 	color:#777777;
 }
-#cart #main, #default #main{
+#cart #main, #checkout{
 	max-width: 900px;
 	margin:0px auto !important;
 	padding:20px;

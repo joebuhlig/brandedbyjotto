@@ -20,6 +20,7 @@ Rails.application.configure do
   end
   end
 
+  config.action_mailer.default :charset => "utf-8"
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

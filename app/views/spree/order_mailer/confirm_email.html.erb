@@ -1,0 +1,157 @@
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;border-collapse:collapse;background-color:#b2bb1c;">
+    
+  <tbody>
+        <tr>
+            <td valign="middle">
+                
+        
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;border-collapse:collapse">
+                    <tbody><tr>
+                        
+                        <td valign="middle" style="padding-top:9px;padding-left:18px;padding-bottom:9px;padding-right:18px">
+                        
+                            <table border="0" cellpadding="18" cellspacing="0" width="100%" style="min-width:100%!important;background-color:#b2bb1c;border-collapse:collapse">
+                                <tbody><tr>
+                                    <td valign="middle" style="color:#f2f2f2;font-family:Helvetica;font-size:24px;font-weight:normal;text-align:center;word-break:break-word;line-height:150%">
+                                        Thank you!
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                    </tr>
+                </tbody></table>
+        
+                
+        
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table>
+  <tr>
+    <td>
+      <p style="text-align:center;">Hi there. Your recent order on Branded By J.Otto has been completed. Your order details are shown below for your reference:</p>
+      <h4 style="color:#b2bb1c;">Order#: <%= @order.number %></h4>
+      <table cellpadding="10">
+        <% @order.line_items.each do |item| %>
+          <tr>
+            <td valign="middle" style="border: 2px solid #eee;"><%= item.variant.sku %></td>
+            <td valign="middle" style="border: 2px solid #eee;">
+              <%= raw(item.variant.product.name) %>
+              <%= raw(item.variant.options_text) -%>
+              <% item.ad_hoc_option_values.each do |pov| %>
+                <p><%= pov.option_value.option_type.presentation %></p>
+                <p><%= pov.option_value.presentation %></p>
+              <% end %>
+              <% item.product_customizations.each do |customization| %>
+                <% next if customization.customized_product_options.all? {|cpo| cpo.empty? } %>
+                <p><%= customization.product_customization_type.presentation %></p>
+                  <% customization.customized_product_options.each do |option| %>
+                    <% next if option.empty? %>
+                      <% partial = option.customizable_product_option.name %>
+                      <% lookup=ActionView::LookupContext.new(ActionController::Base.view_paths, {:formats => [:html]}) %>
+                      <% if lookup.exists?("spree/orders/custom_fields/#{partial}",nil,true) %>
+                        <%= render :partial => "spree/orders/custom_fields/#{partial}", :locals=>{:option => option} %>
+                      <% else %>
+                        <% if option.customization_image? %>
+                          <%= image_tag(option.customization_image.thumb.url) %>
+                        <% else %>
+                          <p><%= option.customizable_product_option.presentation %> = <%= option.value %></p>
+                        <% end %>
+                      <% end %>
+                  <% end %> <%# each option %>
+              <% end %> <%# each customization %>
+
+            </td>
+            <td valign="middle" style="border: 2px solid #eee;">(<%=item.quantity%>) <%= Spree.t('at_symbol') %> <%= item.single_money %> = <%= item.display_amount %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td valign="middle"></td>
+          <td valign="middle" style="border: 2px solid #eee;">
+            <%= Spree.t('order_mailer.confirm_email.subtotal') %>
+          </td>
+          <td valign="middle" style="border: 2px solid #eee;">
+            <%= @order.display_item_total %>
+          </td>
+        </tr>
+        <% if @order.line_item_adjustments.exists? %>
+          <% if @order.all_adjustments.promotion.eligible.exists? %>
+            <% @order.all_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments| %>
+              <tr>
+                <td valign="middle"></td>
+                <td valign="middle" style="border: 2px solid #eee;"><%= Spree.t(:promotion) %> <%= label %>:</td>
+                <td valign="middle" style="border: 2px solid #eee;"><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% @order.shipments.group_by { |s| s.selected_shipping_rate.try(:name) }.each do |name, shipments| %>
+          <tr>
+            <td valign="middle"></td>
+            <td valign="middle" style="border: 2px solid #eee;"><%= Spree.t(:shipping) %> <%= name %>:</td>
+            <td valign="middle" style="border: 2px solid #eee;"><%= Spree::Money.new(shipments.sum(&:discounted_cost), currency: @order.currency) %></td>
+          </tr>
+        <% end %>
+        <% if @order.all_adjustments.eligible.tax.exists? %>
+          <% @order.all_adjustments.eligible.tax.group_by(&:label).each do |label, adjustments| %>
+            <tr>
+              <td valign="middle"></td>
+              <td valign="middle" style="border: 2px solid #eee;"><%= Spree.t(:tax) %> <%= label %>:</td>
+              <td valign="middle" style="border: 2px solid #eee;"><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></td>
+            </tr>
+          <% end %>
+        <% end %>
+        <% @order.adjustments.eligible.each do |adjustment| %>
+          <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
+          <tr>
+            <td valign="middle"></td>
+            <td valign="middle" style="border: 2px solid #eee;"><%= adjustment.label %>:</td>
+            <td valign="middle" style="border: 2px solid #eee;"><%= adjustment.display_amount %></td>
+          </tr>
+        <% end %>
+        <tr>
+          <td valign="middle"></td>
+          <td valign="middle" style="border: 2px solid #eee;">
+            <%= Spree.t('order_mailer.confirm_email.total') %>
+          </td>
+          <td valign="middle" style="border: 2px solid #eee;">
+            <%= @order.display_total %>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td valign="middle" class="expander"></td>
+  </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;border-collapse:collapse;">
+    
+  <tbody>
+        <tr>
+            <td valign="middle">
+                
+        
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;border-collapse:collapse">
+                    <tbody><tr>
+                        
+                        <td valign="middle" style="padding-top:9px;padding-left:18px;padding-bottom:9px;padding-right:18px">
+                        
+                            <table border="0" cellpadding="18" cellspacing="0" width="100%" style="min-width:100%!important;border-collapse:collapse">
+                                <tbody><tr>
+                                    <td valign="middle" style="font-family:Helvetica;font-size:24px;font-weight:normal;text-align:center;word-break:break-word;line-height:150%">
+                                        <a href="http://brandedbyjotto.com" style="color: #b2bb1c;">Branded by J.Otto</a>
+                                    </td>
+                                </tr>
+                            </tbody></table>
+                        </td>
+                    </tr>
+                </tbody></table>
+        
+                
+        
+            </td>
+        </tr>
+    </tbody>
+</table>

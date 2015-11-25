@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: git://github.com/joebuhlig/spree_flexi_variants.git
-  revision: b08f693a83ca215f46274dc51670620912acd513
+  revision: c5b4bcfa7eae4b364cef4d983bdb609aac538024
   branch: master
   specs:
     spree_flexi_variants (2.1.0)
@@ -198,9 +198,9 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.5.1)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.3.0)
+    bootstrap-sass (3.3.6)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     braintree (2.55.0)
       builder (>= 2.0.0)
     builder (3.2.2)
