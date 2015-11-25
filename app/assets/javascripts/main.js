@@ -12,10 +12,11 @@ $(document).on('page:change', function(event) {
 	    var topOfWindow = $(window).scrollTop() + $('.navbar').height() - 25;
 	    if (topOfContent < topOfWindow) {
 	        scrolled();
+          $('.arrow').fadeOut();
 	    }
 	    else {
 	    	unscrolled();
-	    }
+	    };
 	});
 	setTimeout(function(){
 		$(".alert").fadeOut();

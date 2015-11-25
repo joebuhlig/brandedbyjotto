@@ -52,6 +52,7 @@
 
 body {
 	font-family: RobotoDraft, Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	position: relative;
 }
 blockquote{
     border-left: 5px solid #b2bb1c;
@@ -337,11 +338,200 @@ a {
 .hero-image, .hero-image img{
 	width:100%;
 }
+.arrow {
+    width: 0;
+    left: 50%;
+    bottom: 0;
+    position: fixed;
+    margin-left: -40px;
+    border-top: 20px solid #ccc;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    animation: indicate 2s linear infinite;
+}
+
+.arrow::before {
+    width: 80px;
+    display: block;
+    position: absolute;
+    text-align: center;
+    font: .75em 'Arial';
+    bottom: 25px; left: -40px;
+}
+
+@keyframes indicate {
+      0% { bottom: 10% }
+    100% { bottom: -10%; opacity: 0 }
+}
+.home-section h2{
+	margin:0px;
+	padding:0px;
+}
+.home-section-text{
+	margin:25px auto 0px auto;
+	width:345px;
+	background-color: #FFFFFF;
+	padding:10px;
+	text-align: center;
+	border-radius: 4px;
+	box-shadow: 0px 0px 10px #777777;
+	position: absolute;
+	left:0;
+	right:0;
+	z-index: 99;
+}
 #how-it-works{
-    position: relative;
     width: 100%;
     text-align: center;
-    top: -75px;
+    height:100%;
+    margin:0px !important;
+}
+#how-it-works-title{
+    position: absolute;
+    margin: -75px 0px 0px 0px;
+    color: #FFFFFF;
+    font-weight: 200;
+    width: 100%;
+    padding: 0px;
+}
+.section-one, .section-two, .section-three, .section-four{
+	width:100%;
+	margin:0px !important;
+}
+.section-one{
+	background-color: #FFFFFF;
+}
+.section-one .home-section-text{
+    margin: -135px auto 0px auto;
+}
+.img-wrapper{
+    margin: 155px 0px 25px 0px;
+    text-align: center;
+}
+.home-img{
+    box-shadow: 0px 0px 5px #777777;
+    margin: 5px;
+    position: relative;
+    display: inline-block;
+}
+.home-img img{
+	width:100%;
+}
+.section-two{
+	height: 600px;
+}
+.section-two .img-wrapper{
+	position: relative;
+	top: -250px;
+	margin-top:0px;
+	overflow: hidden;
+}
+.section-two .home-img{
+	width:300px;
+}
+.section-three{
+	margin-top: -170px !important;
+}
+.section-three .home-section-text{
+	margin-top:-160px;
+}
+.section-three .img-wrapper{
+	margin-top:175px;
+}
+@media (min-width: 1200px){
+	.section-three .img-wrapper{
+		margin-top:190px;
+	}	
+}
+.section-four{
+	height: 400px;
+	overflow: hidden;
+}
+.section-four .home-background-img{
+	height: 400px;
+}
+.section-four .home-background-img img{
+	margin-top: -400px;
+}
+#get-started-link{
+    position: absolute;
+    text-align: center;
+    margin: 250px auto 0px auto;
+    background-color: #b2bb1c;
+    color: #FFFFFF;
+    z-index: 99;
+    padding: 15px;
+    font-size: 24px;
+    left: 0;
+    right: 0;
+    width: 250px;
+}
+@media (max-width: 700px){
+	.section-two .home-img{
+		width:45%;
+	}
+}
+@media (max-width: 1100px){
+	.img-three{
+		display: none;
+	}
+}
+@media (max-width: 850px){
+	.img-four{
+		display: none;
+	}
+}
+@media (min-width: 675px){
+	.section-one .home-img{
+		width:200px;
+	}
+}
+@media (min-width: 450px){
+	.section-three .home-img{
+		width:200px;
+	}
+}
+@media (max-width: 675px){
+	.img-five{
+		display: none;
+	}
+	.home-img{
+		width:45%;
+	}
+}
+.home-background-image{
+	overflow: hidden;
+}
+.home-background-image img{
+	width:100%;
+	height: auto;
+}
+.shaded-overlay{
+	background-color: #777777;
+	opacity: 0.4;
+	width:100%;
+	height: 400px;
+	position: absolute;
+}
+@media (max-width: 1200px){
+	.home-background-image img{
+		height: 100%;
+		width:auto;
+	}
+}
+.purpose-wrapper{
+	position: absolute;
+	margin-top: 25px;
+}
+.purpose-wrapper h1{
+	text-align: left;
+	color:#FFFFFF;
+	font-size:48px;
+}
+.purpose-wrapper p{
+	color:#FFFFFF;
+	font-size:20px;
+	text-align: left;
 }
 .panel{
 	border:0px;
@@ -570,6 +760,7 @@ h6.variant-option-type strong.selection {
 	background-color: #222222;
 	color:#777777;
 	width:100%;
+	margin: 0px !important;
 }
 .footer h1, .footer h2, .footer h3, .footer h4, .footer h5, .footer h6 {
 	color: #dddddd;
@@ -577,7 +768,7 @@ h6.variant-option-type strong.selection {
 .footer a {
 	color:#777777;
 }
-#cart #main, #checkout{
+#cart #main, #checkout, #order_summary{
 	max-width: 900px;
 	margin:0px auto !important;
 	padding:20px;
