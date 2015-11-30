@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width"/>
-	<style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width"/>
+  <style>
 /**********************************************
 * Ink v1.0.5 - Copyright 2013 ZURB Inc        *
 **********************************************/
@@ -288,7 +288,9 @@ h3 {font-size: 32px;}
 h4 {font-size: 28px;}
 h5 {font-size: 24px;}
 h6 {font-size: 20px;}
-body, table.body, p, td {font-size: 14px;line-height:19px;}
+body, table.body, p, td {font-size: 14px;line-height:19px;
+  max-width: 500px;
+  margin:0px auto;}
 p.lead, p.lede, p.leed {
   font-size: 18px;
   line-height:21px;
@@ -619,21 +621,21 @@ body.outlook p {
         padding-right: 10px !important;
       }
     }
-	</style>
+  </style>
 </head>
 <body>
   <table class="body">
     <tr>
-      <td class="center" align="center" valign="top">
+      <td class="center" align="center" valign="middle">
         <center>
           <%= render partial: 'spree/shared/base_mailer_header' %>
-          <table class="container">
+          <table class="container" style="width: 100% !important;">
             <tr>
               <td>
                 <table class="row">
                   <tr>
                     <td class="wrapper last">
-                      <table class="twelve columns">
+                      <table>
                         <tr>
                           <td>
                             <%= yield %>
