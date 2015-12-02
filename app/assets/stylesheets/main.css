@@ -1,10 +1,10 @@
 @font-face {
 	font-family: Corbert;
-	src: url(/assets/Corbert-Regular.otf);
+	src: url(/images/Corbert-Regular.otf);
 }
 @font-face {
 	font-family: SweetlyBroken;
-	src: url(/assets/Sweetly-Broken.ttf);
+	src: url(/images/Sweetly-Broken.ttf);
 }
 
 body {
@@ -338,9 +338,10 @@ h3, h4, h5, h6 {
       0% { bottom: 10% }
     100% { bottom: -10%; opacity: 0 }
 }
-.home-section h2{
+.home-section h4{
 	margin:0px;
 	padding:0px;
+	font-style: 38px;
 }
 .home-section-text{
 	margin:25px auto 0px auto;
