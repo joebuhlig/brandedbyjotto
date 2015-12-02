@@ -1,9 +1,9 @@
 @font-face {
-	font-family: 'Corbert';
+	font-family: Corbert;
 	src: url(/assets/Corbert-Regular.otf);
 }
 @font-face {
-	font-family: 'Sweetly Broken';
+	font-family: SweetlyBroken;
 	src: url(/assets/Sweetly-Broken.ttf);
 }
 
@@ -19,7 +19,7 @@ a {
 	color: #b2bb1c;
 }
 h1, h2, h3, h4, h5, h6 {
-	font-family: "Sweetly Broken", Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: SweetlyBroken, Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h1{
 	font-size: 68px !important;
@@ -78,7 +78,7 @@ h3, h4, h5, h6 {
 	text-align: center;
 	left:0px;
 	font-size: 98px;
-	font-family: "Sweetly Broken", Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: SweetlyBroken, Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	top: 35px;
 	letter-spacing: initial;
 }
@@ -590,7 +590,7 @@ h6.variant-option-type strong.selection {
 .variant-option-type label, #product-customizations legend, .product-section-title, #ad_hoc_options dt {
     font-weight: 300 !important;
     border:0px !important;
-    font-family: "Sweetly Broken", Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: SweetlyBroken, Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 42px;
 }
 .product-price{
