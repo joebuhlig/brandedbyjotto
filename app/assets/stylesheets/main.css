@@ -79,14 +79,15 @@ h3, h4, h5, h6 {
 	left:0px;
 	font-size: 98px;
 	font-family: SweetlyBroken, Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
-	top: 35px;
+	top: 15px;
 	letter-spacing: initial;
 }
 .page #navbar-background-bottom{
 	width:100%;
 	text-align: center;
 	left:0px;
-	top: 160px;
+	top: 140px;
+	padding:0px 5px;
 }
 
 .shipping-box-wrapper{
