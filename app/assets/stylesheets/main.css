@@ -622,6 +622,9 @@ h6.variant-option-type strong.selection {
     line-height: 1.5;
     width: 100%;
 }
+#checkout .customizations, #order_summary .customizations, #cart-detail .customizations{
+	display:none;
+}
 .image-zoom-background{
 	position: fixed;
     height: 100%;
