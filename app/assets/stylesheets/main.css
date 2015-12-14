@@ -2,10 +2,6 @@
 	font-family: Corbert;
 	src: url(/images/Corbert-Regular.otf);
 }
-@font-face {
-	font-family: SweetlyBroken;
-	src: url(/images/Sweetly-Broken.ttf);
-}
 
 body {
 	font-family: Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -18,17 +14,20 @@ blockquote{
 a {
 	color: #b2bb1c;
 }
+a:hover{
+	text-decoration: none;
+}
 h1, h2, h3, h4, h5, h6 {
-	font-family: SweetlyBroken, Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 'Sacramento', Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h1{
-	font-size: 68px !important;
+	font-size: 55px !important;
 }
 h2 {
-	font-size: 58px !important;
+	font-size: 45px !important;
 }
 h3, h4, h5, h6 {
-	font-size: 42px !important;
+	font-size: 30px !important;
 }
 ::selection{
 	color: #ffffff;
@@ -77,9 +76,9 @@ h3, h4, h5, h6 {
 	width:100%;
 	text-align: center;
 	left:0px;
-	font-size: 98px;
-	font-family: SweetlyBroken, Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
-	top: 15px;
+	font-size: 55px;
+	font-family: 'Sacramento', Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	top: 65px;
 	letter-spacing: initial;
 }
 .page #navbar-background-bottom{
@@ -592,7 +591,7 @@ h6.variant-option-type strong.selection {
 .variant-option-type label, #product-customizations legend, .product-section-title, #ad_hoc_options dt {
     font-weight: 300 !important;
     border:0px !important;
-    font-family: SweetlyBroken, Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Sacramento', Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 42px;
 }
 .product-price{

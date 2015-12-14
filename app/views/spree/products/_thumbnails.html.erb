@@ -10,8 +10,8 @@
     <% if @product.has_variants? %>
       <% @product.variant_images.each do |i| %>
         <% next if @product.images.include?(i) %>
-        <li class='vtmb tmb-<%= i.viewable.id %>'>
-          <%= link_to(image_tag(i.attachment.url(:mini), class: "thumbnail"), i.attachment.url(:product)) %>
+        <li class='vtmb tmb-all tmb-<%= i.viewable.id %>'>
+          <%= link_to(image_tag(i.attachment.url(:large), class: "thumbnail"), i.attachment.url(:product)) %>
         </li>
       <% end %>
     <% end %>
