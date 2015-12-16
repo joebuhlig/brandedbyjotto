@@ -26,6 +26,11 @@
       <%= hidden_field_tag "variant_id", @product.master.id %>
     <% end %>
     <div data-hook="ad_hoc_options"></div>
+    <div class="card-checkbox-wrapper">
+      <label>
+        <input class="card-checkbox" type="checkbox"> Leave a blank card? <strong class="card-checkbox-result">A message will be written.</strong>
+      </label>
+    </div>
     <div data-hook="personal_customizations"></div>
     <% if @product.price_in(current_currency) and !@product.price.nil? %>
       <div data-hook="product_price" class="col-md-5 product-price">

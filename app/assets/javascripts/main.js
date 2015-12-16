@@ -40,6 +40,44 @@ $(document).on('page:change', function(event) {
 	});
 	$(".ad-hoc-options").addClass("form-group");
 	$(".ad-hoc-option-select").addClass("form-control");
+
+  $(".ad-hoc-option-select").on('change', function(){
+    var selected = $(this).find(":selected").text().trim();
+    console.log(selected);
+    switch(selected){
+      case "Accomplishment":
+        $("#card-image img").attr("src", "/images/accomplishment_card.jpg");
+        break;
+      case "Congratulations":
+        $("#card-image img").attr("src", "/images/congratulations_card.jpg");
+        break;
+      case "Encouragement":
+        $("#card-image img").attr("src", "/images/encouragement_card.jpg");
+        break;
+      case "Love":
+        $("#card-image img").attr("src", "/images/love_card.jpg");
+        break;
+      case "Thank You":
+        $("#card-image img").attr("src", "/images/thankyou_card.jpg");
+        break;
+      default:
+        $("#card-image img").attr("src", "/images/novideo_card.jpg");
+    }
+  });
+
+  $("#product-customizations textarea").attr("placeholder", "Enter your message here.");
+  $(".card-checkbox").change(function(){
+    if($(this).is(":checked")){
+      $(".card-checkbox-result").html("A blank card will be sent.");
+      $("#product-customizations textarea").val("Send a blank card.");
+      $("#product-customizations textarea").attr("disabled", true);
+    }
+    else{
+      $(".card-checkbox-result").html("A message will be written.");
+      $("#product-customizations textarea").val("");
+      $("#product-customizations textarea").attr("disabled", false);
+    };
+  })
 });
 
 function scrolled() {

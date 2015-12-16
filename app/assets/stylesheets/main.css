@@ -594,6 +594,15 @@ h6.variant-option-type strong.selection {
     font-family: 'Sacramento', Corbert, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 42px;
 }
+.card-checkbox-result{
+	color: #b2bb1c;
+}
+#card-image{
+	max-width: 500px;
+}
+#card-image img{
+	max-width:100%;
+}
 .product-price{
 	margin:0px;
 	padding:0px;
@@ -608,6 +617,41 @@ h6.variant-option-type strong.selection {
     list-style: none;
     padding:0px;
 }
+#product-customizations textarea{
+	position: relative;
+	top:-130px;
+	font-size: 24px;
+	height:80px;
+    border: 0px !important;
+    box-shadow: inset 0 0px 0px rgba(0,0,0,0) !important;
+}
+#product-customizations fieldset{
+	height:450px;
+}
+@media (max-width: 550px){
+	#product-customizations textarea{
+		top:-125px;
+	}
+}
+@media (max-width: 500px){
+	#product-customizations textarea{
+		top:-115px;
+		height:70px;
+	}
+	#product-customizations fieldset{
+	height:400px;
+	}
+}
+@media (max-width: 450px){
+	#product-customizations textarea{
+		top:-90px;
+		height:50px;
+	}
+	#product-customizations fieldset{
+	height:350px;
+	}
+}
+
 #product-customizations .customization{
 	background-color: #fff;
     background-image: none;
