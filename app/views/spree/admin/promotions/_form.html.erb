@@ -42,7 +42,7 @@
       <%= f.label :usage_limit %>
       <%= f.number_field :usage_limit, :min => 0, :class => 'form-control' %>
       <p class="help-block">
-        Usage: <%= @promotion.credits_count %><br/>Submitted: <%= @promotion.closed_count %>
+        Usage: <%= @promotion.credits_count %><br/>Submits: <%= @promotion.closed_count %>
       </p>
     <% end %>
 

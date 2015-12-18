@@ -64,7 +64,7 @@
           <td><%= promotion.code %></td>
           <td><%= promotion.description %></td>
           <td><%= promotion.usage_limit.nil? ? "∞" : promotion.usage_limit  %></td>
-          <td>Usage: <%= promotion.credits_count %><br/>Submitted: <%=promotion.closed_count %></td>
+          <td>Usage: <%= promotion.credits_count %><br/>Submits: <%=promotion.closed_count %></td>
           <td><%= promotion.expires_at.to_date.to_s(:short_date) if promotion.expires_at %></td>
           <td class="actions actions-2">
             <%= link_to_edit promotion, :no_text => true %>
