@@ -18,4 +18,6 @@ end
 
 Spree.user_class = "Spree::User"
 
+Rails.application.config.spree.promotions.rules << Spree::Promotion::Rules::RestrictFreeShipping
+
 # Rails.configuration.spree.payment_methods << Spree::Gateway::Payeezy
