@@ -7,7 +7,20 @@ Rails.application.routes.draw do
   # We ask that you don't use the :as option here, as Spree relies on it being the default of "spree"
   get '/shop' => 'spree/products#index', as: :products_path
   mount Spree::Core::Engine, :at => '/'
-  
+  Spree::Core::Engine.add_routes do
+    namespace :admin, path: Spree.admin_path do
+      resources :reports, only: [:index] do
+        collection do
+          get :product_summary
+          post :product_summary
+        end
+        collection do
+          get :promotion_summary
+          post :promotion_summary
+        end
+      end
+    end
+  end
 
           # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

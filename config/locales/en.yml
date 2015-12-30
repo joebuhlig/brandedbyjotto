@@ -1030,6 +1030,7 @@ en:
       product_source:
         group: From product group
         manual: Manually choose
+    product_summary_description: A summary by SKU of gross and net sales.
     products: Products
     promotion: Promotion
     promotionable: Promotable
@@ -1087,6 +1088,7 @@ en:
         description: Only the standard shipping will be free.
         name: Restrict Free Shipping
     promotions: Promotions
+    promotion_summary_description: A summary of uses and submits for each discount code.
     promotion_uses: Promotion uses
     propagate_all_variants: Propagate all variants
     properties: Properties

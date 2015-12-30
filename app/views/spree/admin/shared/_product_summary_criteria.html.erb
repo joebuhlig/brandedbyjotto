@@ -1,0 +1,67 @@
+<div class="form-group date-range-filter">
+  <div class="date-range-filter row">
+    <div class="col-md-3">
+      <label>Grouping</label>
+      <select class="form-control" id="grouping_select">
+        <option>Daily</option>
+        <option>Monthly</option>
+        <option>Yearly</option>
+      </select>
+      <input type="hidden" id="hidden_grouping" name="grouping" value="Daily">
+    </div>
+    <div class="col-md-6" id="daily_criteria">
+      <label>Date</label>
+      <%= s.text_field :completed_at_eq, :class => 'datepicker datepicker-from form-control', :value => datepicker_field_value(params[:q][:completed_at_eq]) %>
+    </div>
+    <div class="col-md-8" id="monthly_criteria">
+      <div class="col-md-3">
+        <label>Year</label>
+        <select class="form-control year-select">
+          <% startyear = 2015 %>
+          <% curyear = Time.now.strftime("%Y").to_i %>
+          <% until startyear > curyear do %>
+            <% if startyear == curyear %>
+              <option selected="selected"><%= startyear %></option>
+            <% else %>
+              <option><%= startyear %></option>
+            <% end %>
+            <% startyear +=1 %>
+          <% end %>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label>Month</label>
+        <select class="form-control" id="month-select">
+          <% for startmonth in 1..12 %>
+            <% if Date::MONTHNAMES[startmonth] == Time.now.strftime("%B") %>
+              <option selected="selected" value="<%= startmonth %>"><%= Date::MONTHNAMES[startmonth] %></option>
+            <% else %>
+              <option value="<%= startmonth %>"><%= Date::MONTHNAMES[startmonth] %></option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+      <input type="hidden" id="selected-month" name="selected_month" value="<%= Time.now.strftime("%m/%Y") %>">
+    </div>
+    <div class="col-md-3" id="yearly_criteria">
+      <label>Year</label>
+      <select class="form-control year-select">
+        <% startyear = 2015 %>
+        <% curyear = Time.now.strftime("%Y").to_i %>
+        <% until startyear > curyear do %>
+          <% if startyear == curyear %>
+            <option selected="selected"><%= startyear %></option>
+          <% else %>
+            <option><%= startyear %></option>
+          <% end %>
+          <% startyear +=1 %>
+        <% end %>
+      </select>
+      <input type="hidden" id="selected-year" name="selected_year" value="<%= Time.now.strftime("%Y") %>">
+    </div>
+  </div>
+</div>
+
+<div class="form-actions">
+  <%= button Spree.t(:search), 'search' %>
+</div>

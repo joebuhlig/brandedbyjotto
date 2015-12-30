@@ -1,0 +1,45 @@
+<% content_for :page_title do %>
+  Promotion Summary
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to_with_icon 'arrow-left', Spree.t(:back_to_resource_list, resource: Spree.t(:report)), spree.admin_reports_url, class: 'btn btn-default' %>
+<% end %>
+
+<div class="well">
+<%= search_form_for @search, :url => spree.promotion_summary_admin_reports_path  do |s| %>
+  <%= render :partial => 'spree/admin/shared/promotion_summary_criteria', :locals => {:s => s} %>
+<% end %>
+</div>
+
+<table class="table table-bordered admin-report" data-hook="sales_total">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Used</th>
+      <th>Submitted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @promotions.each do |promotion| %>
+      <tr>
+        <% if params[:grouping] == "Monthly" %>
+        <td><%= promotion.updated_at.year %>-<%= promotion.updated_at.month %></td>
+        <% elsif params[:grouping] == "Yearly" %>
+        <td><%= promotion.updated_at.year %></td>
+        <% else %>
+        <td><%= promotion.updated_at %></td>
+        <% end %>          
+        <td><%= promotion.code %></td>
+        <td><%= promotion.name %></td>
+        <td><%= promotion.used %></td>
+        <td><%= promotion.submitted %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if @promotions.blank? %>
+<div><p>No results for this criteria.</p></div>
+<% end %>
