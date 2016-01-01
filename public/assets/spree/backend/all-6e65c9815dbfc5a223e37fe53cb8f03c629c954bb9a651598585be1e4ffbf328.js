@@ -10866,7 +10866,7 @@ return jQuery;
 
 ;window.Modernizr=function(a,b,c){function A(a){j.cssText=a}function B(a,b){return A(m.join(a+";")+(b||""))}function C(a,b){return typeof a===b}function D(a,b){return!!~(""+a).indexOf(b)}function E(a,b){for(var d in a){var e=a[d];if(!D(e,"-")&&j[e]!==c)return b=="pfx"?e:!0}return!1}function F(a,b,d){for(var e in a){var f=b[a[e]];if(f!==c)return d===!1?a[e]:C(f,"function")?f.bind(d||b):f}return!1}function G(a,b,c){var d=a.charAt(0).toUpperCase()+a.slice(1),e=(a+" "+o.join(d+" ")+d).split(" ");return C(b,"string")||C(b,"undefined")?E(e,b):(e=(a+" "+p.join(d+" ")+d).split(" "),F(e,b,c))}var d="2.8.3",e={},f=!0,g=b.documentElement,h="modernizr",i=b.createElement(h),j=i.style,k,l={}.toString,m=" -webkit- -moz- -o- -ms- ".split(" "),n="Webkit Moz O ms",o=n.split(" "),p=n.toLowerCase().split(" "),q={svg:"http://www.w3.org/2000/svg"},r={},s={},t={},u=[],v=u.slice,w,x=function(a,c,d,e){var f,i,j,k,l=b.createElement("div"),m=b.body,n=m||b.createElement("body");if(parseInt(d,10))while(d--)j=b.createElement("div"),j.id=e?e[d]:h+(d+1),l.appendChild(j);return f=["&#173;",'<style id="s',h,'">',a,"</style>"].join(""),l.id=h,(m?l:n).innerHTML+=f,n.appendChild(l),m||(n.style.background="",n.style.overflow="hidden",k=g.style.overflow,g.style.overflow="hidden",g.appendChild(n)),i=c(l,a),m?l.parentNode.removeChild(l):(n.parentNode.removeChild(n),g.style.overflow=k),!!i},y={}.hasOwnProperty,z;!C(y,"undefined")&&!C(y.call,"undefined")?z=function(a,b){return y.call(a,b)}:z=function(a,b){return b in a&&C(a.constructor.prototype[b],"undefined")},Function.prototype.bind||(Function.prototype.bind=function(b){var c=this;if(typeof c!="function")throw new TypeError;var d=v.call(arguments,1),e=function(){if(this instanceof e){var a=function(){};a.prototype=c.prototype;var f=new a,g=c.apply(f,d.concat(v.call(arguments)));return Object(g)===g?g:f}return c.apply(b,d.concat(v.call(arguments)))};return e}),r.cssanimations=function(){return G("animationName")},r.csstransforms=function(){return!!G("transform")},r.csstransforms3d=function(){var a=!!G("perspective");return a&&"webkitPerspective"in g.style&&x("@media (transform-3d),(-webkit-transform-3d){#modernizr{left:9px;position:absolute;height:3px;}}",function(b,c){a=b.offsetLeft===9&&b.offsetHeight===3}),a},r.csstransitions=function(){return G("transition")},r.svg=function(){return!!b.createElementNS&&!!b.createElementNS(q.svg,"svg").createSVGRect},r.inlinesvg=function(){var a=b.createElement("div");return a.innerHTML="<svg/>",(a.firstChild&&a.firstChild.namespaceURI)==q.svg};for(var H in r)z(r,H)&&(w=H.toLowerCase(),e[w]=r[H](),u.push((e[w]?"":"no-")+w));return e.addTest=function(a,b){if(typeof a=="object")for(var d in a)z(a,d)&&e.addTest(d,a[d]);else{a=a.toLowerCase();if(e[a]!==c)return e;b=typeof b=="function"?b():b,typeof f!="undefined"&&f&&(g.className+=" "+(b?"":"no-")+a),e[a]=b}return e},A(""),i=k=null,function(a,b){function l(a,b){var c=a.createElement("p"),d=a.getElementsByTagName("head")[0]||a.documentElement;return c.innerHTML="x<style>"+b+"</style>",d.insertBefore(c.lastChild,d.firstChild)}function m(){var a=s.elements;return typeof a=="string"?a.split(" "):a}function n(a){var b=j[a[h]];return b||(b={},i++,a[h]=i,j[i]=b),b}function o(a,c,d){c||(c=b);if(k)return c.createElement(a);d||(d=n(c));var g;return d.cache[a]?g=d.cache[a].cloneNode():f.test(a)?g=(d.cache[a]=d.createElem(a)).cloneNode():g=d.createElem(a),g.canHaveChildren&&!e.test(a)&&!g.tagUrn?d.frag.appendChild(g):g}function p(a,c){a||(a=b);if(k)return a.createDocumentFragment();c=c||n(a);var d=c.frag.cloneNode(),e=0,f=m(),g=f.length;for(;e<g;e++)d.createElement(f[e]);return d}function q(a,b){b.cache||(b.cache={},b.createElem=a.createElement,b.createFrag=a.createDocumentFragment,b.frag=b.createFrag()),a.createElement=function(c){return s.shivMethods?o(c,a,b):b.createElem(c)},a.createDocumentFragment=Function("h,f","return function(){var n=f.cloneNode(),c=n.createElement;h.shivMethods&&("+m().join().replace(/[\w\-]+/g,function(a){return b.createElem(a),b.frag.createElement(a),'c("'+a+'")'})+");return n}")(s,b.frag)}function r(a){a||(a=b);var c=n(a);return s.shivCSS&&!g&&!c.hasCSS&&(c.hasCSS=!!l(a,"article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}template{display:none}")),k||q(a,c),a}var c="3.7.0",d=a.html5||{},e=/^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i,f=/^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i,g,h="_html5shiv",i=0,j={},k;(function(){try{var a=b.createElement("a");a.innerHTML="<xyz></xyz>",g="hidden"in a,k=a.childNodes.length==1||function(){b.createElement("a");var a=b.createDocumentFragment();return typeof a.cloneNode=="undefined"||typeof a.createDocumentFragment=="undefined"||typeof a.createElement=="undefined"}()}catch(c){g=!0,k=!0}})();var s={elements:d.elements||"abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video",version:c,shivCSS:d.shivCSS!==!1,supportsUnknownElements:k,shivMethods:d.shivMethods!==!1,type:"default",shivDocument:r,createElement:o,createDocumentFragment:p};a.html5=s,r(b)}(this,b),e._version=d,e._prefixes=m,e._domPrefixes=p,e._cssomPrefixes=o,e.testProp=function(a){return E([a])},e.testAllProps=G,e.testStyles=x,g.className=g.className.replace(/(^|\s)no-js(\s|$)/,"$1$2")+(f?" js "+u.join(" "):""),e}(this,this.document),function(a,b,c){function d(a){return"[object Function]"==o.call(a)}function e(a){return"string"==typeof a}function f(){}function g(a){return!a||"loaded"==a||"complete"==a||"uninitialized"==a}function h(){var a=p.shift();q=1,a?a.t?m(function(){("c"==a.t?B.injectCss:B.injectJs)(a.s,0,a.a,a.x,a.e,1)},0):(a(),h()):q=0}function i(a,c,d,e,f,i,j){function k(b){if(!o&&g(l.readyState)&&(u.r=o=1,!q&&h(),l.onload=l.onreadystatechange=null,b)){"img"!=a&&m(function(){t.removeChild(l)},50);for(var d in y[c])y[c].hasOwnProperty(d)&&y[c][d].onload()}}var j=j||B.errorTimeout,l=b.createElement(a),o=0,r=0,u={t:d,s:c,e:f,a:i,x:j};1===y[c]&&(r=1,y[c]=[]),"object"==a?l.data=c:(l.src=c,l.type=a),l.width=l.height="0",l.onerror=l.onload=l.onreadystatechange=function(){k.call(this,r)},p.splice(e,0,u),"img"!=a&&(r||2===y[c]?(t.insertBefore(l,s?null:n),m(k,j)):y[c].push(l))}function j(a,b,c,d,f){return q=0,b=b||"j",e(a)?i("c"==b?v:u,a,b,this.i++,c,d,f):(p.splice(this.i++,0,a),1==p.length&&h()),this}function k(){var a=B;return a.loader={load:j,i:0},a}var l=b.documentElement,m=a.setTimeout,n=b.getElementsByTagName("script")[0],o={}.toString,p=[],q=0,r="MozAppearance"in l.style,s=r&&!!b.createRange().compareNode,t=s?l:n.parentNode,l=a.opera&&"[object Opera]"==o.call(a.opera),l=!!b.attachEvent&&!l,u=r?"object":l?"script":"img",v=l?"script":u,w=Array.isArray||function(a){return"[object Array]"==o.call(a)},x=[],y={},z={timeout:function(a,b){return b.length&&(a.timeout=b[0]),a}},A,B;B=function(a){function b(a){var a=a.split("!"),b=x.length,c=a.pop(),d=a.length,c={url:c,origUrl:c,prefixes:a},e,f,g;for(f=0;f<d;f++)g=a[f].split("="),(e=z[g.shift()])&&(c=e(c,g));for(f=0;f<b;f++)c=x[f](c);return c}function g(a,e,f,g,h){var i=b(a),j=i.autoCallback;i.url.split(".").pop().split("?").shift(),i.bypass||(e&&(e=d(e)?e:e[a]||e[g]||e[a.split("/").pop().split("?")[0]]),i.instead?i.instead(a,e,f,g,h):(y[i.url]?i.noexec=!0:y[i.url]=1,f.load(i.url,i.forceCSS||!i.forceJS&&"css"==i.url.split(".").pop().split("?").shift()?"c":c,i.noexec,i.attrs,i.timeout),(d(e)||d(j))&&f.load(function(){k(),e&&e(i.origUrl,h,g),j&&j(i.origUrl,h,g),y[i.url]=2})))}function h(a,b){function c(a,c){if(a){if(e(a))c||(j=function(){var a=[].slice.call(arguments);k.apply(this,a),l()}),g(a,j,b,0,h);else if(Object(a)===a)for(n in m=function(){var b=0,c;for(c in a)a.hasOwnProperty(c)&&b++;return b}(),a)a.hasOwnProperty(n)&&(!c&&!--m&&(d(j)?j=function(){var a=[].slice.call(arguments);k.apply(this,a),l()}:j[n]=function(a){return function(){var b=[].slice.call(arguments);a&&a.apply(this,b),l()}}(k[n])),g(a[n],j,b,n,h))}else!c&&l()}var h=!!a.test,i=a.load||a.both,j=a.callback||f,k=j,l=a.complete||f,m,n;c(h?a.yep:a.nope,!!i),i&&c(i)}var i,j,l=this.yepnope.loader;if(e(a))g(a,0,l,0);else if(w(a))for(i=0;i<a.length;i++)j=a[i],e(j)?g(j,0,l,0):w(j)?B(j):Object(j)===j&&h(j,l);else Object(a)===a&&h(a,l)},B.addPrefix=function(a,b){z[a]=b},B.addFilter=function(a){x.push(a)},B.errorTimeout=1e4,null==b.readyState&&b.addEventListener&&(b.readyState="loading",b.addEventListener("DOMContentLoaded",A=function(){b.removeEventListener("DOMContentLoaded",A,0),b.readyState="complete"},0)),a.yepnope=k(),a.yepnope.executeStack=h,a.yepnope.injectJs=function(a,c,d,e,i,j){var k=b.createElement("script"),l,o,e=e||B.errorTimeout;k.src=a;for(o in d)k.setAttribute(o,d[o]);c=j?h:c||f,k.onreadystatechange=k.onload=function(){!l&&g(k.readyState)&&(l=1,c(),k.onload=k.onreadystatechange=null)},m(function(){l||(l=1,c(1))},e),i?k.onload():n.parentNode.insertBefore(k,n)},a.yepnope.injectCss=function(a,c,d,e,g,i){var e=b.createElement("link"),j,c=i?h:c||f;e.href=a,e.rel="stylesheet",e.type="text/css";for(j in d)e.setAttribute(j,d[j]);g||(n.parentNode.insertBefore(e,n),m(c,0))}}(this,document),Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0))};
 /* ========================================================================
- * Bootstrap: affix.js v3.3.5
+ * Bootstrap: affix.js v3.3.6
  * http://getbootstrap.com/javascript/#affix
  * ========================================================================
  * Copyright 2011-2015 Twitter, Inc.
@@ -10896,7 +10896,7 @@ return jQuery;
     this.checkPosition()
   }
 
-  Affix.VERSION  = '3.3.5'
+  Affix.VERSION  = '3.3.6'
 
   Affix.RESET    = 'affix affix-top affix-bottom'
 
@@ -11029,7 +11029,7 @@ return jQuery;
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: alert.js v3.3.5
+ * Bootstrap: alert.js v3.3.6
  * http://getbootstrap.com/javascript/#alerts
  * ========================================================================
  * Copyright 2011-2015 Twitter, Inc.
@@ -11049,7 +11049,7 @@ return jQuery;
     $(el).on('click', dismiss, this.close)
   }
 
-  Alert.VERSION = '3.3.5'
+  Alert.VERSION = '3.3.6'
 
   Alert.TRANSITION_DURATION = 150
 
@@ -11124,7 +11124,7 @@ return jQuery;
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: button.js v3.3.5
+ * Bootstrap: button.js v3.3.6
  * http://getbootstrap.com/javascript/#buttons
  * ========================================================================
  * Copyright 2011-2015 Twitter, Inc.
@@ -11145,7 +11145,7 @@ return jQuery;
     this.isLoading = false
   }
 
-  Button.VERSION  = '3.3.5'
+  Button.VERSION  = '3.3.6'
 
   Button.DEFAULTS = {
     loadingText: 'loading...'
@@ -11245,7 +11245,7 @@ return jQuery;
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: carousel.js v3.3.5
+ * Bootstrap: carousel.js v3.3.6
  * http://getbootstrap.com/javascript/#carousel
  * ========================================================================
  * Copyright 2011-2015 Twitter, Inc.
@@ -11277,7 +11277,7 @@ return jQuery;
       .on('mouseleave.bs.carousel', $.proxy(this.cycle, this))
   }
 
-  Carousel.VERSION  = '3.3.5'
+  Carousel.VERSION  = '3.3.6'
 
   Carousel.TRANSITION_DURATION = 600
 
@@ -11483,7 +11483,7 @@ return jQuery;
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: collapse.js v3.3.5
+ * Bootstrap: collapse.js v3.3.6
  * http://getbootstrap.com/javascript/#collapse
  * ========================================================================
  * Copyright 2011-2015 Twitter, Inc.
@@ -11514,7 +11514,7 @@ return jQuery;
     if (this.options.toggle) this.toggle()
   }
 
-  Collapse.VERSION  = '3.3.5'
+  Collapse.VERSION  = '3.3.6'
 
   Collapse.TRANSITION_DURATION = 350
 
@@ -11695,7 +11695,7 @@ return jQuery;
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: dropdown.js v3.3.5
+ * Bootstrap: dropdown.js v3.3.6
  * http://getbootstrap.com/javascript/#dropdowns
  * ========================================================================
  * Copyright 2011-2015 Twitter, Inc.
@@ -11716,7 +11716,7 @@ return jQuery;
     $(element).on('click.bs.dropdown', this.toggle)
   }
 
-  Dropdown.VERSION = '3.3.5'
+  Dropdown.VERSION = '3.3.6'
 
   function getParent($this) {
     var selector = $this.attr('data-target')
@@ -11748,7 +11748,7 @@ return jQuery;
       if (e.isDefaultPrevented()) return
 
       $this.attr('aria-expanded', 'false')
-      $parent.removeClass('open').trigger('hidden.bs.dropdown', relatedTarget)
+      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget))
     })
   }
 
@@ -11782,7 +11782,7 @@ return jQuery;
 
       $parent
         .toggleClass('open')
-        .trigger('shown.bs.dropdown', relatedTarget)
+        .trigger($.Event('shown.bs.dropdown', relatedTarget))
     }
 
     return false
@@ -11861,396 +11861,7 @@ return jQuery;
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: tab.js v3.3.5
- * http://getbootstrap.com/javascript/#tabs
- * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-
-+function ($) {
-  'use strict';
-
-  // TAB CLASS DEFINITION
-  // ====================
-
-  var Tab = function (element) {
-    // jscs:disable requireDollarBeforejQueryAssignment
-    this.element = $(element)
-    // jscs:enable requireDollarBeforejQueryAssignment
-  }
-
-  Tab.VERSION = '3.3.5'
-
-  Tab.TRANSITION_DURATION = 150
-
-  Tab.prototype.show = function () {
-    var $this    = this.element
-    var $ul      = $this.closest('ul:not(.dropdown-menu)')
-    var selector = $this.data('target')
-
-    if (!selector) {
-      selector = $this.attr('href')
-      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
-    }
-
-    if ($this.parent('li').hasClass('active')) return
-
-    var $previous = $ul.find('.active:last a')
-    var hideEvent = $.Event('hide.bs.tab', {
-      relatedTarget: $this[0]
-    })
-    var showEvent = $.Event('show.bs.tab', {
-      relatedTarget: $previous[0]
-    })
-
-    $previous.trigger(hideEvent)
-    $this.trigger(showEvent)
-
-    if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
-
-    var $target = $(selector)
-
-    this.activate($this.closest('li'), $ul)
-    this.activate($target, $target.parent(), function () {
-      $previous.trigger({
-        type: 'hidden.bs.tab',
-        relatedTarget: $this[0]
-      })
-      $this.trigger({
-        type: 'shown.bs.tab',
-        relatedTarget: $previous[0]
-      })
-    })
-  }
-
-  Tab.prototype.activate = function (element, container, callback) {
-    var $active    = container.find('> .active')
-    var transition = callback
-      && $.support.transition
-      && ($active.length && $active.hasClass('fade') || !!container.find('> .fade').length)
-
-    function next() {
-      $active
-        .removeClass('active')
-        .find('> .dropdown-menu > .active')
-          .removeClass('active')
-        .end()
-        .find('[data-toggle="tab"]')
-          .attr('aria-expanded', false)
-
-      element
-        .addClass('active')
-        .find('[data-toggle="tab"]')
-          .attr('aria-expanded', true)
-
-      if (transition) {
-        element[0].offsetWidth // reflow for transition
-        element.addClass('in')
-      } else {
-        element.removeClass('fade')
-      }
-
-      if (element.parent('.dropdown-menu').length) {
-        element
-          .closest('li.dropdown')
-            .addClass('active')
-          .end()
-          .find('[data-toggle="tab"]')
-            .attr('aria-expanded', true)
-      }
-
-      callback && callback()
-    }
-
-    $active.length && transition ?
-      $active
-        .one('bsTransitionEnd', next)
-        .emulateTransitionEnd(Tab.TRANSITION_DURATION) :
-      next()
-
-    $active.removeClass('in')
-  }
-
-
-  // TAB PLUGIN DEFINITION
-  // =====================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.tab')
-
-      if (!data) $this.data('bs.tab', (data = new Tab(this)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.tab
-
-  $.fn.tab             = Plugin
-  $.fn.tab.Constructor = Tab
-
-
-  // TAB NO CONFLICT
-  // ===============
-
-  $.fn.tab.noConflict = function () {
-    $.fn.tab = old
-    return this
-  }
-
-
-  // TAB DATA-API
-  // ============
-
-  var clickHandler = function (e) {
-    e.preventDefault()
-    Plugin.call($(this), 'show')
-  }
-
-  $(document)
-    .on('click.bs.tab.data-api', '[data-toggle="tab"]', clickHandler)
-    .on('click.bs.tab.data-api', '[data-toggle="pill"]', clickHandler)
-
-}(jQuery);
-/* ========================================================================
- * Bootstrap: transition.js v3.3.5
- * http://getbootstrap.com/javascript/#transitions
- * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-
-+function ($) {
-  'use strict';
-
-  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
-  // ============================================================
-
-  function transitionEnd() {
-    var el = document.createElement('bootstrap')
-
-    var transEndEventNames = {
-      WebkitTransition : 'webkitTransitionEnd',
-      MozTransition    : 'transitionend',
-      OTransition      : 'oTransitionEnd otransitionend',
-      transition       : 'transitionend'
-    }
-
-    for (var name in transEndEventNames) {
-      if (el.style[name] !== undefined) {
-        return { end: transEndEventNames[name] }
-      }
-    }
-
-    return false // explicit for ie8 (  ._.)
-  }
-
-  // http://blog.alexmaccaw.com/css-transitions
-  $.fn.emulateTransitionEnd = function (duration) {
-    var called = false
-    var $el = this
-    $(this).one('bsTransitionEnd', function () { called = true })
-    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
-    setTimeout(callback, duration)
-    return this
-  }
-
-  $(function () {
-    $.support.transition = transitionEnd()
-
-    if (!$.support.transition) return
-
-    $.event.special.bsTransitionEnd = {
-      bindType: $.support.transition.end,
-      delegateType: $.support.transition.end,
-      handle: function (e) {
-        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
-      }
-    }
-  })
-
-}(jQuery);
-/* ========================================================================
- * Bootstrap: scrollspy.js v3.3.5
- * http://getbootstrap.com/javascript/#scrollspy
- * ========================================================================
- * Copyright 2011-2015 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- * ======================================================================== */
-
-
-
-+function ($) {
-  'use strict';
-
-  // SCROLLSPY CLASS DEFINITION
-  // ==========================
-
-  function ScrollSpy(element, options) {
-    this.$body          = $(document.body)
-    this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
-    this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
-    this.selector       = (this.options.target || '') + ' .nav li > a'
-    this.offsets        = []
-    this.targets        = []
-    this.activeTarget   = null
-    this.scrollHeight   = 0
-
-    this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
-    this.refresh()
-    this.process()
-  }
-
-  ScrollSpy.VERSION  = '3.3.5'
-
-  ScrollSpy.DEFAULTS = {
-    offset: 10
-  }
-
-  ScrollSpy.prototype.getScrollHeight = function () {
-    return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
-  }
-
-  ScrollSpy.prototype.refresh = function () {
-    var that          = this
-    var offsetMethod  = 'offset'
-    var offsetBase    = 0
-
-    this.offsets      = []
-    this.targets      = []
-    this.scrollHeight = this.getScrollHeight()
-
-    if (!$.isWindow(this.$scrollElement[0])) {
-      offsetMethod = 'position'
-      offsetBase   = this.$scrollElement.scrollTop()
-    }
-
-    this.$body
-      .find(this.selector)
-      .map(function () {
-        var $el   = $(this)
-        var href  = $el.data('target') || $el.attr('href')
-        var $href = /^#./.test(href) && $(href)
-
-        return ($href
-          && $href.length
-          && $href.is(':visible')
-          && [[$href[offsetMethod]().top + offsetBase, href]]) || null
-      })
-      .sort(function (a, b) { return a[0] - b[0] })
-      .each(function () {
-        that.offsets.push(this[0])
-        that.targets.push(this[1])
-      })
-  }
-
-  ScrollSpy.prototype.process = function () {
-    var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
-    var scrollHeight = this.getScrollHeight()
-    var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
-    var offsets      = this.offsets
-    var targets      = this.targets
-    var activeTarget = this.activeTarget
-    var i
-
-    if (this.scrollHeight != scrollHeight) {
-      this.refresh()
-    }
-
-    if (scrollTop >= maxScroll) {
-      return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
-    }
-
-    if (activeTarget && scrollTop < offsets[0]) {
-      this.activeTarget = null
-      return this.clear()
-    }
-
-    for (i = offsets.length; i--;) {
-      activeTarget != targets[i]
-        && scrollTop >= offsets[i]
-        && (offsets[i + 1] === undefined || scrollTop < offsets[i + 1])
-        && this.activate(targets[i])
-    }
-  }
-
-  ScrollSpy.prototype.activate = function (target) {
-    this.activeTarget = target
-
-    this.clear()
-
-    var selector = this.selector +
-      '[data-target="' + target + '"],' +
-      this.selector + '[href="' + target + '"]'
-
-    var active = $(selector)
-      .parents('li')
-      .addClass('active')
-
-    if (active.parent('.dropdown-menu').length) {
-      active = active
-        .closest('li.dropdown')
-        .addClass('active')
-    }
-
-    active.trigger('activate.bs.scrollspy')
-  }
-
-  ScrollSpy.prototype.clear = function () {
-    $(this.selector)
-      .parentsUntil(this.options.target, '.active')
-      .removeClass('active')
-  }
-
-
-  // SCROLLSPY PLUGIN DEFINITION
-  // ===========================
-
-  function Plugin(option) {
-    return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.scrollspy')
-      var options = typeof option == 'object' && option
-
-      if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
-      if (typeof option == 'string') data[option]()
-    })
-  }
-
-  var old = $.fn.scrollspy
-
-  $.fn.scrollspy             = Plugin
-  $.fn.scrollspy.Constructor = ScrollSpy
-
-
-  // SCROLLSPY NO CONFLICT
-  // =====================
-
-  $.fn.scrollspy.noConflict = function () {
-    $.fn.scrollspy = old
-    return this
-  }
-
-
-  // SCROLLSPY DATA-API
-  // ==================
-
-  $(window).on('load.bs.scrollspy.data-api', function () {
-    $('[data-spy="scroll"]').each(function () {
-      var $spy = $(this)
-      Plugin.call($spy, $spy.data())
-    })
-  })
-
-}(jQuery);
-/* ========================================================================
- * Bootstrap: modal.js v3.3.5
+ * Bootstrap: modal.js v3.3.6
  * http://getbootstrap.com/javascript/#modals
  * ========================================================================
  * Copyright 2011-2015 Twitter, Inc.
@@ -12285,7 +11896,7 @@ return jQuery;
     }
   }
 
-  Modal.VERSION  = '3.3.5'
+  Modal.VERSION  = '3.3.6'
 
   Modal.TRANSITION_DURATION = 300
   Modal.BACKDROP_TRANSITION_DURATION = 150
@@ -12588,7 +12199,396 @@ return jQuery;
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: tooltip.js v3.3.5
+ * Bootstrap: scrollspy.js v3.3.6
+ * http://getbootstrap.com/javascript/#scrollspy
+ * ========================================================================
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
+
++function ($) {
+  'use strict';
+
+  // SCROLLSPY CLASS DEFINITION
+  // ==========================
+
+  function ScrollSpy(element, options) {
+    this.$body          = $(document.body)
+    this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+    this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+    this.selector       = (this.options.target || '') + ' .nav li > a'
+    this.offsets        = []
+    this.targets        = []
+    this.activeTarget   = null
+    this.scrollHeight   = 0
+
+    this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+    this.refresh()
+    this.process()
+  }
+
+  ScrollSpy.VERSION  = '3.3.6'
+
+  ScrollSpy.DEFAULTS = {
+    offset: 10
+  }
+
+  ScrollSpy.prototype.getScrollHeight = function () {
+    return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+  }
+
+  ScrollSpy.prototype.refresh = function () {
+    var that          = this
+    var offsetMethod  = 'offset'
+    var offsetBase    = 0
+
+    this.offsets      = []
+    this.targets      = []
+    this.scrollHeight = this.getScrollHeight()
+
+    if (!$.isWindow(this.$scrollElement[0])) {
+      offsetMethod = 'position'
+      offsetBase   = this.$scrollElement.scrollTop()
+    }
+
+    this.$body
+      .find(this.selector)
+      .map(function () {
+        var $el   = $(this)
+        var href  = $el.data('target') || $el.attr('href')
+        var $href = /^#./.test(href) && $(href)
+
+        return ($href
+          && $href.length
+          && $href.is(':visible')
+          && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+      })
+      .sort(function (a, b) { return a[0] - b[0] })
+      .each(function () {
+        that.offsets.push(this[0])
+        that.targets.push(this[1])
+      })
+  }
+
+  ScrollSpy.prototype.process = function () {
+    var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+    var scrollHeight = this.getScrollHeight()
+    var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+    var offsets      = this.offsets
+    var targets      = this.targets
+    var activeTarget = this.activeTarget
+    var i
+
+    if (this.scrollHeight != scrollHeight) {
+      this.refresh()
+    }
+
+    if (scrollTop >= maxScroll) {
+      return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+    }
+
+    if (activeTarget && scrollTop < offsets[0]) {
+      this.activeTarget = null
+      return this.clear()
+    }
+
+    for (i = offsets.length; i--;) {
+      activeTarget != targets[i]
+        && scrollTop >= offsets[i]
+        && (offsets[i + 1] === undefined || scrollTop < offsets[i + 1])
+        && this.activate(targets[i])
+    }
+  }
+
+  ScrollSpy.prototype.activate = function (target) {
+    this.activeTarget = target
+
+    this.clear()
+
+    var selector = this.selector +
+      '[data-target="' + target + '"],' +
+      this.selector + '[href="' + target + '"]'
+
+    var active = $(selector)
+      .parents('li')
+      .addClass('active')
+
+    if (active.parent('.dropdown-menu').length) {
+      active = active
+        .closest('li.dropdown')
+        .addClass('active')
+    }
+
+    active.trigger('activate.bs.scrollspy')
+  }
+
+  ScrollSpy.prototype.clear = function () {
+    $(this.selector)
+      .parentsUntil(this.options.target, '.active')
+      .removeClass('active')
+  }
+
+
+  // SCROLLSPY PLUGIN DEFINITION
+  // ===========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.scrollspy')
+      var options = typeof option == 'object' && option
+
+      if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.scrollspy
+
+  $.fn.scrollspy             = Plugin
+  $.fn.scrollspy.Constructor = ScrollSpy
+
+
+  // SCROLLSPY NO CONFLICT
+  // =====================
+
+  $.fn.scrollspy.noConflict = function () {
+    $.fn.scrollspy = old
+    return this
+  }
+
+
+  // SCROLLSPY DATA-API
+  // ==================
+
+  $(window).on('load.bs.scrollspy.data-api', function () {
+    $('[data-spy="scroll"]').each(function () {
+      var $spy = $(this)
+      Plugin.call($spy, $spy.data())
+    })
+  })
+
+}(jQuery);
+/* ========================================================================
+ * Bootstrap: tab.js v3.3.6
+ * http://getbootstrap.com/javascript/#tabs
+ * ========================================================================
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
+
++function ($) {
+  'use strict';
+
+  // TAB CLASS DEFINITION
+  // ====================
+
+  var Tab = function (element) {
+    // jscs:disable requireDollarBeforejQueryAssignment
+    this.element = $(element)
+    // jscs:enable requireDollarBeforejQueryAssignment
+  }
+
+  Tab.VERSION = '3.3.6'
+
+  Tab.TRANSITION_DURATION = 150
+
+  Tab.prototype.show = function () {
+    var $this    = this.element
+    var $ul      = $this.closest('ul:not(.dropdown-menu)')
+    var selector = $this.data('target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') // strip for ie7
+    }
+
+    if ($this.parent('li').hasClass('active')) return
+
+    var $previous = $ul.find('.active:last a')
+    var hideEvent = $.Event('hide.bs.tab', {
+      relatedTarget: $this[0]
+    })
+    var showEvent = $.Event('show.bs.tab', {
+      relatedTarget: $previous[0]
+    })
+
+    $previous.trigger(hideEvent)
+    $this.trigger(showEvent)
+
+    if (showEvent.isDefaultPrevented() || hideEvent.isDefaultPrevented()) return
+
+    var $target = $(selector)
+
+    this.activate($this.closest('li'), $ul)
+    this.activate($target, $target.parent(), function () {
+      $previous.trigger({
+        type: 'hidden.bs.tab',
+        relatedTarget: $this[0]
+      })
+      $this.trigger({
+        type: 'shown.bs.tab',
+        relatedTarget: $previous[0]
+      })
+    })
+  }
+
+  Tab.prototype.activate = function (element, container, callback) {
+    var $active    = container.find('> .active')
+    var transition = callback
+      && $.support.transition
+      && ($active.length && $active.hasClass('fade') || !!container.find('> .fade').length)
+
+    function next() {
+      $active
+        .removeClass('active')
+        .find('> .dropdown-menu > .active')
+          .removeClass('active')
+        .end()
+        .find('[data-toggle="tab"]')
+          .attr('aria-expanded', false)
+
+      element
+        .addClass('active')
+        .find('[data-toggle="tab"]')
+          .attr('aria-expanded', true)
+
+      if (transition) {
+        element[0].offsetWidth // reflow for transition
+        element.addClass('in')
+      } else {
+        element.removeClass('fade')
+      }
+
+      if (element.parent('.dropdown-menu').length) {
+        element
+          .closest('li.dropdown')
+            .addClass('active')
+          .end()
+          .find('[data-toggle="tab"]')
+            .attr('aria-expanded', true)
+      }
+
+      callback && callback()
+    }
+
+    $active.length && transition ?
+      $active
+        .one('bsTransitionEnd', next)
+        .emulateTransitionEnd(Tab.TRANSITION_DURATION) :
+      next()
+
+    $active.removeClass('in')
+  }
+
+
+  // TAB PLUGIN DEFINITION
+  // =====================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('bs.tab')
+
+      if (!data) $this.data('bs.tab', (data = new Tab(this)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.tab
+
+  $.fn.tab             = Plugin
+  $.fn.tab.Constructor = Tab
+
+
+  // TAB NO CONFLICT
+  // ===============
+
+  $.fn.tab.noConflict = function () {
+    $.fn.tab = old
+    return this
+  }
+
+
+  // TAB DATA-API
+  // ============
+
+  var clickHandler = function (e) {
+    e.preventDefault()
+    Plugin.call($(this), 'show')
+  }
+
+  $(document)
+    .on('click.bs.tab.data-api', '[data-toggle="tab"]', clickHandler)
+    .on('click.bs.tab.data-api', '[data-toggle="pill"]', clickHandler)
+
+}(jQuery);
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.6
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+/* ========================================================================
+ * Bootstrap: tooltip.js v3.3.6
  * http://getbootstrap.com/javascript/#tooltip
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ========================================================================
@@ -12616,7 +12616,7 @@ return jQuery;
     this.init('tooltip', element, options)
   }
 
-  Tooltip.VERSION  = '3.3.5'
+  Tooltip.VERSION  = '3.3.6'
 
   Tooltip.TRANSITION_DURATION = 150
 
@@ -13103,7 +13103,7 @@ return jQuery;
 
 }(jQuery);
 /* ========================================================================
- * Bootstrap: popover.js v3.3.5
+ * Bootstrap: popover.js v3.3.6
  * http://getbootstrap.com/javascript/#popovers
  * ========================================================================
  * Copyright 2011-2015 Twitter, Inc.
@@ -13124,7 +13124,7 @@ return jQuery;
 
   if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js')
 
-  Popover.VERSION  = '3.3.5'
+  Popover.VERSION  = '3.3.6'
 
   Popover.DEFAULTS = $.extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
     placement: 'right',
@@ -34384,380 +34384,67 @@ var update_state = function (region, done) {
   });
 
 }).call(this);
-/**
-This is a collection of javascript functions and whatnot
-under the spree namespace that do stuff we find helpful.
-Hopefully, this will evolve into a propper class.
-**/
+$(document).ready(function(event) {
+	$("#grouping_select").change(function(e){
+		var value = $("#grouping_select").val();
+		$("#hidden_grouping").val(value);
+		switch (value) {
+			case "Daily":
+				$("#monthly_criteria, #yearly_criteria").hide();
+				$("#daily_criteria").show();
+				return;
+			case "Monthly":
+				$("#daily_criteria, #yearly_criteria").hide();
+				$("#monthly_criteria").show();
+				return;
+			case "Yearly":
+				$("#daily_criteria, #monthly_criteria").hide();
+				$("#yearly_criteria").show();
+				return;
+		}
+	});
 
+	$("#monthly_criteria .year-select, #monthly_criteria #month-select").change(function(e){
+		var month = $("#month-select").val();
+		var year = $("#monthly_criteria .year-select").val();
+		$("#selected-month").val(month + "/" + year);
+		console.log(month + "/" + year);
+	});
 
-jQuery(function($) {
+	$("#yearly_criteria .year-select").change(function(e){
+		var year = $("#yearly_criteria .year-select").val();
+		$("#selected-year").val(year);
+	});
+	var grouping = getUrlParameter("grouping");
+	var selectedMonth = getUrlParameter("selected_month");
+	selectedMonth = selectedMonth.split("/");
+	selectedMonthMonth = selectedMonth[0];
+	selectedMonthYear = selectedMonth[1];
+	var selectedYear = getUrlParameter("selected_year");
+	$("#grouping_select").val(grouping);
+	$("#grouping_select").trigger("change");
+	$("#month-select").val(selectedMonthMonth);
+	$("#month-select").trigger("change");
+	$("#monthly_criteria .year-select").val(selectedMonthYear);
+	$("#monthly_criteria .year-select").trigger("change");
+	$("#yearly_criteria .year-select").val(selectedYear);
+	$("#yearly_criteria .year-select").trigger("change");
+})
 
-  // Add some tips
-  $('.with-tip').tooltip();
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
 
-  $('.js-show-index-filters').click(function(){
-    $(".filter-well").slideToggle();
-    $(this).parents(".filter-wrap").toggleClass("collapsed");
-    $("span.icon", $(this)).toggleClass("icon-chevron-down");
-  });
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
 
-  $(".js-collapse-sidebar").click(function(){
-    $(".main-right-sidebar").toggleClass("collapsed");
-    $("section.content").toggleClass("sidebar-collapsed");
-    $("span.icon", $(this)).toggleClass("icon-chevron-right");
-    $("span.icon", $(this)).toggleClass("icon-chevron-left");
-  });
-
-  $('#main-sidebar').find('[data-toggle="collapse"]').on('click', function()
-    {
-      if($(this).find('.icon-chevron-left').length == 1){
-        $(this).find('.icon-chevron-left').removeClass('icon-chevron-left').addClass('icon-chevron-down');
-      }
-      else {
-        $(this).find('.icon-chevron-down').removeClass('icon-chevron-down').addClass('icon-chevron-left');
-      }
-    }
-  )
-
-  // Sidebar nav toggle functionality
-  var sidebar_toggle = $('#sidebar-toggle');
-
-  sidebar_toggle.on('click', function(){
-    var wrapper = $('#wrapper');
-    var main    = $('#main-part');
-
-    if(wrapper.hasClass('sidebar-minimized')){
-      wrapper.removeClass('sidebar-minimized');
-      main
-        .removeClass('col-sm-12 col-md-12 sidebar-collapsed')
-        .addClass('col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2');
-      $.cookie('sidebar-minimized', 'false', { path: '/admin' });
-    }
-    else {
-      wrapper.addClass('sidebar-minimized');
-      main
-        .removeClass('col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2')
-        .addClass('col-sm-12 col-md-12 sidebar-collapsed');
-      $.cookie('sidebar-minimized', 'true', { path: '/admin' });
-    }
-  });
-
-  $('.sidebar-menu-item').mouseover(function(){
-    if($('#wrapper').hasClass('sidebar-minimized')){
-      $(this).addClass('menu-active');
-      $(this).find('ul.nav').addClass('submenu-active');
-    }
-  });
-  $('.sidebar-menu-item').mouseout(function(){
-    if($('#wrapper').hasClass('sidebar-minimized')){
-      $(this).removeClass('menu-active');
-      $(this).find('ul.nav').removeClass('submenu-active');
-    }
-  });
-
-  // TODO: remove this js temp behaviour and fix this decent
-  // Temp quick search
-  // When there was a search term, copy it
-  $(".js-quick-search").val($(".js-quick-search-target").val());
-  // Catch the quick search form submit and submit the real form
-  $("#quick-search").submit(function(){
-    $(".js-quick-search-target").val($(".js-quick-search").val());
-    $("#table-filter form").submit();
-    return false;
-  });
-
-  // Main menu active item submenu show
-  var active_item = $('#sidebar').find('.selected');
-  active_item.parent().addClass('in');
-  active_item.parent().prev()
-    .find('.icon-chevron-left')
-    .removeClass('icon-chevron-left')
-    .addClass('icon-chevron-down');
-
-  // Replace ▼ and ▲ in sort_link with nicer icons
-  $(".sort_link").each(function(){
-    // Remove the &nbsp; in the text
-    var sort_link_text = $(this).text().replace('\xA0', '');
-
-    if(sort_link_text.indexOf("▼") >= 0){
-      $(this).text(sort_link_text.replace("▼",""));
-      $(this).append('<span class="icon icon-chevron-down"></span>');
-    } else if(sort_link_text.indexOf("▲") >= 0){
-      $(this).text(sort_link_text.replace("▲",""));
-      $(this).append('<span class="icon icon-chevron-up"></span>');
-    }
-  });
-
-  // Clickable ransack filters
-  $(".js-add-filter").click(function() {
-    var ransack_field = $(this).data("ransack-field");
-    var ransack_value = $(this).data("ransack-value");
-
-    $("#" + ransack_field).val(ransack_value);
-    $("#table-filter form").submit();
-  });
-
-  $(document).on("click", ".js-delete-filter", function() {
-    var ransack_field = $(this).parents(".js-filter").data("ransack-field");
-
-    $("#" + ransack_field).val('');
-    $("#table-filter form").submit();
-  });
-
-  $(".js-filterable").each(function() {
-    var $this = $(this);
-
-    if ($this.val()) {
-      var ransack_value, filter;
-      var ransack_field = $this.attr("id");
-      var label = $('label[for="' + ransack_field + '"]');
-
-      if ($this.is("select")) {
-        ransack_value = $this.find('option:selected').text();
-      } else {
-        ransack_value = $this.val();
-      }
-
-      label = label.text() + ': ' + ransack_value;
-      filter = '<span class="js-filter label label-default" data-ransack-field="' + ransack_field + '">' + label + '<span class="icon icon-delete js-delete-filter"></span></span>';
-
-      $(".js-filters").append(filter).show();
-    }
-  });
-
-  // Enable sidebar toggle
-  $("[data-toggle='offcanvas']").click(function(e) {
-    e.preventDefault();
-
-    // If window is small enough, enable sidebar push menu
-    if ($(window).width() <= 992) {
-      $('.row-offcanvas').toggleClass('active');
-      $('.left-side').removeClass("collapse-left");
-      $(".right-side").removeClass("strech");
-      $('.row-offcanvas').toggleClass("relative");
-    } else {
-      // Else, enable content streching
-      $('.left-side').toggleClass("collapse-left");
-      $(".right-side").toggleClass("strech");
-    }
-  });
-
-  // Make flash messages disappear
-  setTimeout('$(".alert-auto-disappear").slideUp()', 5000);
-
-});
-
-
-$.fn.visible = function(cond) { this[cond ? 'show' : 'hide' ]() };
-
-show_flash = function(type, message) {
-  var flash_div = $('.flash.' + type);
-  if (flash_div.length == 0) {
-    flash_div = $('<div class="alert alert-' + type + '" />');
-    $('#content').prepend(flash_div);
-  }
-  flash_div.html(message).show().delay(10000).slideUp();
-}
-
-
-// Apply to individual radio button that makes another element visible when checked
-$.fn.radioControlsVisibilityOfElement = function(dependentElementSelector){
-  if(!this.get(0)){ return  }
-  showValue = this.get(0).value;
-  radioGroup = $("input[name='" + this.get(0).name + "']");
-  radioGroup.each(function(){
-    $(this).click(function(){
-      $(dependentElementSelector).visible(this.checked && this.value == showValue)
-    });
-    if(this.checked){ this.click() }
-  });
-}
-
-handle_date_picker_fields = function(){
-  $('.datepicker').datepicker({
-    dateFormat: Spree.translations.date_picker,
-    dayNames: Spree.translations.abbr_day_names,
-    dayNamesMin: Spree.translations.abbr_day_names,
-    firstDay: Spree.translations.first_day,
-    monthNames: Spree.translations.month_names,
-    prevText: Spree.translations.previous,
-    nextText: Spree.translations.next,
-    showOn: "focus"
-  });
-
-  // Correctly display range dates
-  $('.date-range-filter .datepicker-from').datepicker('option', 'onSelect', function(selectedDate) {
-    $(".date-range-filter .datepicker-to" ).datepicker( "option", "minDate", selectedDate );
-  });
-  $('.date-range-filter .datepicker-to').datepicker('option', 'onSelect', function(selectedDate) {
-    $(".date-range-filter .datepicker-from" ).datepicker( "option", "maxDate", selectedDate );
-  });
-}
-
-$(document).ready(function(){
-  handle_date_picker_fields();
-  $(".observe_field").on('change', function() {
-    target = $(this).data("update");
-    $(target).hide();
-    $.ajax({ dataType: 'html',
-             url: $(this).data("base-url")+encodeURIComponent($(this).val()),
-             type: 'get',
-             success: function(data){
-               $(target).html(data);
-               $(target).show();
-             }
-    });
-  });
-
-  var uniqueId = 1;
-  $('.spree_add_fields').click(function() {
-    var target = $(this).data("target");
-    var new_table_row = $(target + ' tr:visible:last').clone();
-    var new_id = new Date().getTime() + (uniqueId++);
-    new_table_row.find("input, select").each(function () {
-      var el = $(this);
-      el.val("");
-      el.prop("id", el.prop("id").replace(/\d+/, new_id))
-      el.prop("name", el.prop("name").replace(/\d+/, new_id))
-    })
-    // When cloning a new row, set the href of all icons to be an empty "#"
-    // This is so that clicking on them does not perform the actions for the
-    // duplicated row
-    new_table_row.find("a").each(function () {
-      var el = $(this);
-      el.prop('href', '#');
-    })
-    $(target).prepend(new_table_row);
-  })
-
-  $('body').on('click', '.delete-resource', function() {
-    var el = $(this);
-    if (confirm(el.data("confirm"))) {
-      $.ajax({
-        type: 'POST',
-        url: $(this).prop("href"),
-        data: {
-          _method: 'delete',
-          authenticity_token: AUTH_TOKEN
-        },
-        dataType: 'script',
-        success: function(response) {
-          el.parents("tr").fadeOut('hide', function() {
-            $(this).remove();
-          });
-        },
-        error: function(response, textStatus, errorThrown) {
-          show_flash('error', response.responseText);
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
         }
-      });
     }
-    return false;
-  });
-
-  $('body').on('click', 'a.spree_remove_fields', function() {
-    el = $(this);
-    el.prev("input[type=hidden]").val("1");
-    el.closest(".fields").hide();
-    if (el.prop("href").substr(-1) == '#') {
-      el.parents("tr").fadeOut('hide');
-    }else if (el.prop("href")) {
-      $.ajax({
-        type: 'POST',
-        url: el.prop("href"),
-        data: {
-          _method: 'delete',
-          authenticity_token: AUTH_TOKEN
-        },
-        success: function(response) {
-          el.parents("tr").fadeOut('hide');
-        },
-        error: function(response, textStatus, errorThrown) {
-          show_flash('error', response.responseText);
-        }
-
-      })
-    }
-    return false;
-  });
-
-  $('body').on('click', '.select_properties_from_prototype', function(){
-    $("#busy_indicator").show();
-    var clicked_link = $(this);
-    $.ajax({ dataType: 'script', url: clicked_link.prop("href"), type: 'get',
-        success: function(data){
-          clicked_link.parent("td").parent("tr").hide();
-          $("#busy_indicator").hide();
-        }
-    });
-    return false;
-  });
-
-  // Fix sortable helper
-  var fixHelper = function(e, ui) {
-      ui.children().each(function() {
-          $(this).width($(this).width());
-      });
-      return ui;
-  };
-
-  $('table.sortable').ready(function(){
-    var td_count = $(this).find('tbody tr:first-child td').length
-    $('table.sortable tbody').sortable(
-      {
-        handle: '.handle',
-        helper: fixHelper,
-        placeholder: 'ui-sortable-placeholder',
-        update: function(event, ui) {
-          $("#progress").show();
-          positions = {};
-          $.each($('table.sortable tbody tr'), function(position, obj){
-            reg = /spree_(\w+_?)+_(\d+)/;
-            parts = reg.exec($(obj).prop('id'));
-            if (parts) {
-              positions['positions['+parts[2]+']'] = position;
-            }
-          });
-          $.ajax({
-            type: 'POST',
-            dataType: 'script',
-            url: $(ui.item).closest("table.sortable").data("sortable-link"),
-            data: positions,
-            success: function(data){ $("#progress").hide(); }
-          });
-        },
-        start: function (event, ui) {
-          // Set correct height for placehoder (from dragged tr)
-          ui.placeholder.height(ui.item.height())
-          // Fix placeholder content to make it correct width
-          ui.placeholder.html("<td colspan='"+(td_count-1)+"'></td><td class='actions'></td>")
-        },
-        stop: function (event, ui) {
-          // Fix odd/even classes after reorder
-          $("table.sortable tr:even").removeClass("odd even").addClass("even");
-          $("table.sortable tr:odd").removeClass("odd even").addClass("odd");
-        }
-
-      });
-  });
-
-  $('a.dismiss').click(function() {
-    $(this).parent().fadeOut();
-  });
-
-  window.Spree.advanceOrder = function() {
-      $.ajax({
-          type: "PUT",
-          async: false,
-          data: {
-            token: Spree.api_key
-          },
-          url: Spree.url(Spree.routes.checkouts_api + "/" + order_number + "/advance")
-      }).done(function() {
-          window.location.reload();
-      });
-  }
-});
+};
 $(function() {
   var calculator_select = $('select#calc_type')
   var original_calc_type = calculator_select.prop('value');
@@ -35149,10 +34836,24 @@ $.fn.optionValueAutocomplete = function (options) {
     }
   });
 };
-$(document).ready(function () {
-  'use strict';
+// overrides spree core's version to include our variant configurations
+$(document).ready(function(){
 
-  $('[data-hook="add_product_name"]').find('.variant_autocomplete').variantAutocomplete();
+  $("#add_line_item_to_order").off("click"); // remove spree's version
+
+  $("#add_line_item_to_order").on("click", function(){
+    if($('#add_variant_id').val() == ''){ return false; }
+    update_target = $(this).attr("data-update");
+    $.ajax({ dataType: 'script', url: this.href, type: "POST",
+        data: {"line_item[variant_id]": $('#add_variant_id').val(),
+              "line_item[quantity]": $('#add_quantity').val(),
+              "variant_configurations": $('#variant_configurations').serialize()}
+    });
+    return false;
+  });
+
+  $(".product_autocomplete").product_autocomplete();
+
 });
 $(document).ready(function () {
   'use strict';
@@ -37654,12 +37355,2105 @@ Spree.routes.stock_items_api = function(stock_location_id) {
 
 
 
+(function($){$.formatCurrency={};$.formatCurrency.regions=[];$.formatCurrency.regions[""]={symbol:"$",positiveFormat:"%s%n",negativeFormat:"(%s%n)",decimalSymbol:".",digitGroupSymbol:",",groupDigits:true};
+$.fn.formatCurrency=function(destination,settings){if(arguments.length==1&&typeof destination!=="string"){settings=destination;destination=false
+}var defaults={name:"formatCurrency",colorize:false,region:"",global:true,roundToDecimalPlace:2,eventOnDecimalsEntered:false};defaults=$.extend(defaults,$.formatCurrency.regions[""]);
+settings=$.extend(defaults,settings);if(settings.region.length>0){settings=$.extend(settings,getRegionOrCulture(settings.region))}settings.regex=generateRegex(settings);
+return this.each(function(){$this=$(this);var num="0";num=$this[$this.is("input, select, textarea")?"val":"html"]();if(num.search("\\(")>=0){num="-"+num
+}if(num===""||(num==="-"&&settings.roundToDecimalPlace===-1)){return}if(isNaN(num)){num=num.replace(settings.regex,"");if(num===""||(num==="-"&&settings.roundToDecimalPlace===-1)){return
+}if(settings.decimalSymbol!="."){num=num.replace(settings.decimalSymbol,".")}if(isNaN(num)){num="0"}}var numParts=String(num).split(".");var isPositive=(num==Math.abs(num));
+var hasDecimals=(numParts.length>1);var decimals=(hasDecimals?numParts[1].toString():"0");var originalDecimals=decimals;num=Math.abs(numParts[0]);
+num=isNaN(num)?0:num;if(settings.roundToDecimalPlace>=0){decimals=parseFloat("1."+decimals);decimals=decimals.toFixed(settings.roundToDecimalPlace);
+if(decimals.substring(0,1)=="2"){num=Number(num)+1}decimals=decimals.substring(2)}num=String(num);if(settings.groupDigits){for(var i=0;i<Math.floor((num.length-(1+i))/3);
+i++){num=num.substring(0,num.length-(4*i+3))+settings.digitGroupSymbol+num.substring(num.length-(4*i+3))}}if((hasDecimals&&settings.roundToDecimalPlace==-1)||settings.roundToDecimalPlace>0){num+=settings.decimalSymbol+decimals
+}var format=isPositive?settings.positiveFormat:settings.negativeFormat;var money=format.replace(/%s/g,settings.symbol);money=money.replace(/%n/g,num);
+var $destination=$([]);if(!destination){$destination=$this}else{$destination=$(destination)}$destination[$destination.is("input, select, textarea")?"val":"html"](money);
+if(hasDecimals&&settings.eventOnDecimalsEntered&&originalDecimals.length>settings.roundToDecimalPlace){$destination.trigger("decimalsEntered",originalDecimals)
+}if(settings.colorize){$destination.css("color",isPositive?"black":"red")}})};$.fn.toNumber=function(settings){var defaults=$.extend({name:"toNumber",region:"",global:true},$.formatCurrency.regions[""]);
+settings=jQuery.extend(defaults,settings);if(settings.region.length>0){settings=$.extend(settings,getRegionOrCulture(settings.region))}settings.regex=generateRegex(settings);
+return this.each(function(){var method=$(this).is("input, select, textarea")?"val":"html";$(this)[method]($(this)[method]().replace("(","(-").replace(settings.regex,""))
+})};$.fn.asNumber=function(settings){var defaults=$.extend({name:"asNumber",region:"",parse:true,parseType:"Float",global:true},$.formatCurrency.regions[""]);
+settings=jQuery.extend(defaults,settings);if(settings.region.length>0){settings=$.extend(settings,getRegionOrCulture(settings.region))}settings.regex=generateRegex(settings);
+settings.parseType=validateParseType(settings.parseType);var method=$(this).is("input, select, textarea")?"val":"html";var num=$(this)[method]();
+num=num?num:"";num=num.replace("(","(-");num=num.replace(settings.regex,"");if(!settings.parse){return num}if(num.length==0){num="0"}if(settings.decimalSymbol!="."){num=num.replace(settings.decimalSymbol,".")
+}return window["parse"+settings.parseType](num)};function getRegionOrCulture(region){var regionInfo=$.formatCurrency.regions[region];if(regionInfo){return regionInfo
+}else{if(/(\w+)-(\w+)/g.test(region)){var culture=region.replace(/(\w+)-(\w+)/g,"$1");return $.formatCurrency.regions[culture]}}return null}function validateParseType(parseType){switch(parseType.toLowerCase()){case"int":return"Int";
+case"float":return"Float";default:throw"invalid parseType"}}function generateRegex(settings){if(settings.symbol===""){return new RegExp("[^\\d"+settings.decimalSymbol+"-]","g")
+}else{var symbol=settings.symbol.replace("$","\\$").replace(".","\\.");return new RegExp(symbol+"|[^\\d"+settings.decimalSymbol+"-]","g")}}})(jQuery);
+//  This file is part of the jQuery formatCurrency Plugin.
+//
+//    The jQuery formatCurrency Plugin is free software: you can redistribute it
+//    and/or modify it under the terms of the GNU General Public License as published 
+//    by the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+
+//    The jQuery formatCurrency Plugin is distributed in the hope that it will
+//    be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+//    of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License along with 
+//    the jQuery formatCurrency Plugin.  If not, see <http://www.gnu.org/licenses/>.
+
+(function($) {
+
+	$.formatCurrency.regions['af-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['am-ET'] = {
+		symbol: 'ETB',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-AE'] = {
+		symbol: 'د.إ.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-BH'] = {
+		symbol: 'د.ب.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-DZ'] = {
+		symbol: 'د.ج.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-EG'] = {
+		symbol: 'ج.م.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-IQ'] = {
+		symbol: 'د.ع.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-JO'] = {
+		symbol: 'د.ا.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-KW'] = {
+		symbol: 'د.ك.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-LB'] = {
+		symbol: 'ل.ل.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-LY'] = {
+		symbol: 'د.ل.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-MA'] = {
+		symbol: 'د.م.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-OM'] = {
+		symbol: 'ر.ع.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-QA'] = {
+		symbol: 'ر.ق.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-SA'] = {
+		symbol: 'ر.س.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-SY'] = {
+		symbol: 'ل.س.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-TN'] = {
+		symbol: 'د.ت.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ar-YE'] = {
+		symbol: 'ر.ي.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['arn-CL'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['as-IN'] = {
+		symbol: 'ট',
+		positiveFormat: '%n%s',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['az-Cyrl-AZ'] = {
+		symbol: 'ман.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['az-Latn-AZ'] = {
+		symbol: 'man.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ba-RU'] = {
+		symbol: 'һ.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['be-BY'] = {
+		symbol: 'р.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bg-BG'] = {
+		symbol: 'лв',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bn-BD'] = {
+		symbol: '৳',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bn-IN'] = {
+		symbol: 'টা',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bo-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['br-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bs-Cyrl-BA'] = {
+		symbol: 'КМ',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['bs-Latn-BA'] = {
+		symbol: 'KM',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ca-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['co-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['cs-CZ'] = {
+		symbol: 'Kč',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['cy-GB'] = {
+		symbol: '£',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['da-DK'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-AT'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-CH'] = {
+		symbol: 'SFr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-DE'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-LI'] = {
+		symbol: 'CHF',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de-LU'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['de'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['dsb-DE'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['dv-MV'] = {
+		symbol: 'ރ.',
+		positiveFormat: '%n %s',
+		negativeFormat: '%n %s-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['el-GR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-029'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-AU'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-BZ'] = {
+		symbol: 'BZ$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-GB'] = {
+		symbol: '£',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-IE'] = {
+		symbol: '€',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-IN'] = {
+		symbol: 'Rs.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-JM'] = {
+		symbol: 'J$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-MY'] = {
+		symbol: 'RM',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-NZ'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-PH'] = {
+		symbol: 'Php',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-SG'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-TT'] = {
+		symbol: 'TT$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['en-ZW'] = {
+		symbol: 'Z$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-AR'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-BO'] = {
+		symbol: '$b',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-CL'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-CO'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-CR'] = {
+		symbol: '₡',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-DO'] = {
+		symbol: 'RD$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-EC'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-GT'] = {
+		symbol: 'Q',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-HN'] = {
+		symbol: 'L.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-MX'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-NI'] = {
+		symbol: 'C$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PA'] = {
+		symbol: 'B/.',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PE'] = {
+		symbol: 'S/.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PR'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-PY'] = {
+		symbol: 'Gs',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-SV'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-US'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-UY'] = {
+		symbol: '$U',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es-VE'] = {
+		symbol: 'Bs',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['es'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['et-EE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['eu-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fa-IR'] = {
+		symbol: 'ريال',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '/',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fi-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fil-PH'] = {
+		symbol: 'PhP',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fo-FO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-BE'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-CA'] = {
+		symbol: '$',
+		positiveFormat: '%n %s',
+		negativeFormat: '(%n %s)',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-CH'] = {
+		symbol: 'SFr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-LU'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr-MC'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fr'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['fy-NL'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ga-IE'] = {
+		symbol: '€',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['gl-ES'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['gsw-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['gu-IN'] = {
+		symbol: 'રૂ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ha-Latn-NG'] = {
+		symbol: 'N',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['he-IL'] = {
+		symbol: '₪',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hi-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hr-BA'] = {
+		symbol: 'KM',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hr-HR'] = {
+		symbol: 'kn',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hsb-DE'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hu-HU'] = {
+		symbol: 'Ft',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['hy-AM'] = {
+		symbol: 'դր.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['id-ID'] = {
+		symbol: 'Rp',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ig-NG'] = {
+		symbol: 'N',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ii-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['is-IS'] = {
+		symbol: 'kr.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['it-CH'] = {
+		symbol: 'SFr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['it-IT'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['it'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['iu-Cans-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['iu-Latn-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ja-JP'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ja'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ka-GE'] = {
+		symbol: 'Lari',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kk-KZ'] = {
+		symbol: 'Т',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '-',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kl-GL'] = {
+		symbol: 'kr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['km-KH'] = {
+		symbol: '៛',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kn-IN'] = {
+		symbol: 'ರೂ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ko-KR'] = {
+		symbol: '₩',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['kok-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ky-KG'] = {
+		symbol: 'сом',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '-',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lb-LU'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lo-LA'] = {
+		symbol: '₭',
+		positiveFormat: '%n%s',
+		negativeFormat: '(%n%s)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lt-LT'] = {
+		symbol: 'Lt',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['lv-LV'] = {
+		symbol: 'Ls',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mi-NZ'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mk-MK'] = {
+		symbol: 'ден.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ml-IN'] = {
+		symbol: 'ക',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mn-MN'] = {
+		symbol: '₮',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mn-Mong-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['moh-CA'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mr-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ms-BN'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ms-MY'] = {
+		symbol: 'R',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['mt-MT'] = {
+		symbol: 'Lm',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nb-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ne-NP'] = {
+		symbol: 'रु',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nl-BE'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nl-NL'] = {
+		symbol: '€',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nn-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['nso-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['oc-FR'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['or-IN'] = {
+		symbol: 'ଟ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pa-IN'] = {
+		symbol: 'ਰੁ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pl-PL'] = {
+		symbol: 'zł',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['prs-AF'] = {
+		symbol: '؋',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ps-AF'] = {
+		symbol: '؋',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '٫',
+		digitGroupSymbol: '٬',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pt-BR'] = {
+		symbol: 'R$',
+		positiveFormat: '%s %n',
+		negativeFormat: '-%s %n',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['pt-PT'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['qut-GT'] = {
+		symbol: 'Q',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['quz-BO'] = {
+		symbol: '$b',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['quz-EC'] = {
+		symbol: '$',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['quz-PE'] = {
+		symbol: 'S/.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['rm-CH'] = {
+		symbol: 'fr.',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: '\'',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ro-RO'] = {
+		symbol: 'lei',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ru'] = {
+		symbol: ' руб.',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['rw-RW'] = {
+		symbol: 'RWF',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sa-IN'] = {
+		symbol: 'रु',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sah-RU'] = {
+		symbol: 'с.',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['se-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['se-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['se-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['si-LK'] = {
+		symbol: 'රු.',
+		positiveFormat: '%s %n',
+		negativeFormat: '(%s %n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sk-SK'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sl-SI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sma-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sma-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['smj-NO'] = {
+		symbol: 'kr',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['smj-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['smn-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sms-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sq-AL'] = {
+		symbol: 'Lek',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Cyrl-BA'] = {
+		symbol: 'КМ',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Cyrl-CS'] = {
+		symbol: 'Дин.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Latn-BA'] = {
+		symbol: 'KM',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sr-Latn-CS'] = {
+		symbol: 'Din.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sv-FI'] = {
+		symbol: '€',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sv-SE'] = {
+		symbol: 'kr',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['sw-KE'] = {
+		symbol: 'S',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['syr-SY'] = {
+		symbol: 'ل.س.‏',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ta-IN'] = {
+		symbol: 'ரூ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['te-IN'] = {
+		symbol: 'రూ',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s -%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tg-Cyrl-TJ'] = {
+		symbol: 'т.р.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ';',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['th-TH'] = {
+		symbol: '฿',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tk-TM'] = {
+		symbol: 'm.',
+		positiveFormat: '%n%s',
+		negativeFormat: '-%n%s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tn-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tr-TR'] = {
+		symbol: 'TL',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tt-RU'] = {
+		symbol: 'р.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['tzm-Latn-DZ'] = {
+		symbol: 'DZD',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ug-CN'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['uk-UA'] = {
+		symbol: 'грн.',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['ur-PK'] = {
+		symbol: 'Rs',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s%n-',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['uz-Cyrl-UZ'] = {
+		symbol: 'сўм',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['uz-Latn-UZ'] = {
+		symbol: 'su\'m',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['vi-VN'] = {
+		symbol: '₫',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: '.',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['wo-SN'] = {
+		symbol: 'XOF',
+		positiveFormat: '%n %s',
+		negativeFormat: '-%n %s',
+		decimalSymbol: ',',
+		digitGroupSymbol: ' ',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['xh-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['yo-NG'] = {
+		symbol: 'N',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-CN'] = {
+		symbol: '￥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-HK'] = {
+		symbol: 'HK$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-MO'] = {
+		symbol: 'MOP',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-SG'] = {
+		symbol: '$',
+		positiveFormat: '%s%n',
+		negativeFormat: '(%s%n)',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh-TW'] = {
+		symbol: 'NT$',
+		positiveFormat: '%s%n',
+		negativeFormat: '-%s%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zh'] = {
+		symbol: '¥',
+		positiveFormat: '%s%n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+	$.formatCurrency.regions['zu-ZA'] = {
+		symbol: 'R',
+		positiveFormat: '%s %n',
+		negativeFormat: '%s-%n',
+		decimalSymbol: '.',
+		digitGroupSymbol: ',',
+		groupDigits: true
+	};
+
+})(jQuery);
+// until I learn how to magically append functionality to the 'success' path below, i need to forklift & paste from spree proper
+$.fn.product_autocomplete = function(){
+  return this.each(function() {
+    $(this).autocomplete({
+      source: function(request, response) {
+        $.get(Spree.routes.product_search + '?' + jQuery.param({ q: $('.product_autocomplete').val(), authenticity_token: encodeURIComponent($('meta[name=csrf-token]').attr("content"))}), function(data) {
+          result = prep_product_autocomplete_data(data)
+          response(result);
+        });
+      },
+      minLength: 4,
+      focus: function(event, ui) {
+        $('.product_autocomplete').val(ui.item.label);
+        return false;
+      },
+      select: function(event, ui) {
+        $('.product_autocomplete').val(ui.item.label);
+        product = ui.item.data;
+        if (product['variant'] == undefined) {
+          // product
+          $('#add_variant_id').val(product['product']['master']['id']);
+        } else {
+          // variant
+          $('#add_variant_id').val(product['variant']['id']);
+        }
+        // we might have some flexi-content to load for this product
+        $.getScript('/admin/variant_configurations/' + $('#add_variant_id').val());
+        return false;
+      }
+    }).data("autocomplete")._renderItem = function(ul, item) {
+      $(ul).addClass('ac_results');
+      html = format_product_autocomplete(item);
+      return $("<li></li>")
+              .data("item.autocomplete", item)
+              .append("<a>" + html + "</a>")
+              .appendTo(ul);
+    }
+
+    $(this).data("autocomplete")._resizeMenu = function() {
+      var ul = this.menu.element;
+      ul.outerWidth(this.element.outerWidth());
+    }
+  });
+}
+;
+
+
+
+
+$(document).ready(function() {
+  Spree.translations.user_selectable = "User Selectable";
+});
+(function() {
+  $(document).ready(function() {
+    var makePostRequest, partsTable, searchForParts, searchResults, showErrorMessages;
+    Spree.routes.available_admin_product_parts = function(productSlug) {
+      return Spree.pathFor("admin/products/" + productSlug + "/parts/available");
+    };
+    showErrorMessages = function(xhr) {
+      var response;
+      response = JSON.parse(xhr.responseText);
+      return show_flash("error", response);
+    };
+    partsTable = $("#product_parts");
+    searchResults = $("#search_hits");
+    searchForParts = function() {
+      var productSlug, searchUrl;
+      productSlug = partsTable.data("product-slug");
+      searchUrl = Spree.routes.available_admin_product_parts(productSlug);
+      return $.ajax({
+        data: {
+          q: $("#searchtext").val()
+        },
+        dataType: 'html',
+        success: function(request) {
+          searchResults.html(request);
+          return searchResults.show();
+        },
+        type: 'POST',
+        url: searchUrl
+      });
+    };
+    $("#searchtext").keypress(function(e) {
+      if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+        searchForParts();
+        return false;
+      } else {
+        return true;
+      }
+    });
+    $("#search_parts_button").click(function(e) {
+      e.preventDefault();
+      return searchForParts();
+    });
+    makePostRequest = function(link, post_params) {
+      var request, spinner;
+      if (post_params == null) {
+        post_params = {};
+      }
+      spinner = $("img.spinner", link.parent());
+      spinner.show();
+      request = $.ajax({
+        type: "POST",
+        url: link.attr("href"),
+        data: post_params,
+        dateType: "script"
+      });
+      request.fail(showErrorMessages);
+      request.always(function() {
+        return spinner.hide();
+      });
+      return false;
+    };
+    searchResults.on("click", "a.add_product_part_link", function(event) {
+      var link, loadingIndicator, part, quantityField, row, selectedVariantOption;
+      event.preventDefault();
+      part = {};
+      link = $(this);
+      row = $("#" + link.data("target"));
+      loadingIndicator = $("img.spinner", link.parent());
+      quantityField = $('input:last', row);
+      part.count = quantityField.val();
+      if (row.hasClass("with-variants")) {
+        selectedVariantOption = $('select option:selected', row);
+        part.variant_id = selectedVariantOption.val();
+        if (selectedVariantOption.text() === Spree.translations.user_selectable) {
+          part.variant_selection_deferred = "t";
+          part.variant_id = link.data("master-variant-id");
+        }
+      } else {
+        part.variant_id = $('input[name="part[id]"]', row).val();
+      }
+      return makePostRequest(link, {
+        assemblies_part: part
+      });
+    });
+    partsTable.on("click", "a.set_count_admin_product_part_link", function() {
+      var params;
+      params = {
+        count: $("input", $(this).parent().parent()).val()
+      };
+      return makePostRequest($(this), params);
+    });
+    return partsTable.on("click", "a.remove_admin_product_part_link", function() {
+      return makePostRequest($(this));
+    });
+  });
+
+}).call(this);
 // This is a manifest file that'll be compiled into including all the files listed below.
 // Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
 // be included in the compiled file accessible from http://example.com/assets/application.js
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
+
+
 
 
 

@@ -12,4 +12,4 @@
 //= require spree/backend/spree_variant_options
 //= require spree/backend/spree_flexi_variants
 //= require spree/backend/spree_product_assembly
-//= require spree/backend/main
+//= require admin

@@ -31,18 +31,20 @@ $(document).ready(function(event) {
 	});
 	var grouping = getUrlParameter("grouping");
 	var selectedMonth = getUrlParameter("selected_month");
-	selectedMonth = selectedMonth.split("/");
-	selectedMonthMonth = selectedMonth[0];
-	selectedMonthYear = selectedMonth[1];
-	var selectedYear = getUrlParameter("selected_year");
-	$("#grouping_select").val(grouping);
-	$("#grouping_select").trigger("change");
-	$("#month-select").val(selectedMonthMonth);
-	$("#month-select").trigger("change");
-	$("#monthly_criteria .year-select").val(selectedMonthYear);
-	$("#monthly_criteria .year-select").trigger("change");
-	$("#yearly_criteria .year-select").val(selectedYear);
-	$("#yearly_criteria .year-select").trigger("change");
+	if (typeof selectedMonth !== 'undefined'){
+		selectedMonth = selectedMonth.split("/");
+		selectedMonthMonth = selectedMonth[0];
+		selectedMonthYear = selectedMonth[1];
+		var selectedYear = getUrlParameter("selected_year");
+		$("#grouping_select").val(grouping);
+		$("#grouping_select").trigger("change");
+		$("#month-select").val(selectedMonthMonth);
+		$("#month-select").trigger("change");
+		$("#monthly_criteria .year-select").val(selectedMonthYear);
+		$("#monthly_criteria .year-select").trigger("change");
+		$("#yearly_criteria .year-select").val(selectedYear);
+		$("#yearly_criteria .year-select").trigger("change");
+	};
 })
 
 var getUrlParameter = function getUrlParameter(sParam) {
