@@ -668,7 +668,7 @@ h6.variant-option-type strong.selection {
 #checkout .customizations, #order_summary .customizations, #cart-detail .customizations{
 	display:none;
 }
-.image-zoom-background{
+.image-zoom-background, .size-chart-background{
 	position: fixed;
     height: 100%;
     width: 100%;
@@ -682,7 +682,7 @@ h6.variant-option-type strong.selection {
 .image-zoom{
 	height:100%;
 }
-.image-zoom-wrapper{
+.image-zoom-wrapper, .size-chart-wrapper{
 	display:none;
 	width:100%;
 	text-align: center;
@@ -818,4 +818,22 @@ h6.variant-option-type strong.selection {
 }
 #checkout_form_confirm [data-hook="order-shipment"], #order_summary [data-hook="order-shipment"]{
 	display:none;
+}
+.size-chart-button{
+	color: #b2bb1c;
+	cursor: pointer;
+}
+.size-chart{
+	width: 500px;
+    margin: 75px auto 0px auto;
+    padding: 25px;
+    background: #ffffff;
+    max-width: 100%;
+}
+.size-chart-image{
+	width: 50%;
+}
+.size-chart-chart{
+	margin: 25px 0px;
+	width: 100%;
 }
