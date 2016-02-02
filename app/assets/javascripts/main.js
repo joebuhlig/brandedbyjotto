@@ -88,6 +88,31 @@ $(document).on('page:change', function(event) {
       $("#product-customizations textarea").attr("disabled", false);
     };
   })
+
+  var request = $.ajax({
+        type: "GET",
+        url: "https://crossorigin.me/https://www.instagram.com/branded_by_j.otto/"
+  });
+  request.success(function(data){
+    scripts = $(data).filter('script');
+    $(scripts).each(function(index){
+      var myString = $(this).text();
+      if (myString.substr(0, 18) == "window._sharedData"){
+        $('#instafeed-script').html(myString);
+        eval($('#instafeed-script').html());
+        var node = _sharedData.entry_data.ProfilePage[0].user.media.nodes[0];
+        var src = node.display_src;
+        var code = node.code;
+        var caption = node.caption;
+        $("#instafeed img").attr("src", src);
+        $("#instafeed a").attr("href", "https://www.instagram.com/p/" + code);
+        $("#instafeed .caption").text(caption);
+        console.log(src);
+        console.log(code);
+        console.log(caption);
+      }
+    })
+  });
 });
 
 function scrolled() {

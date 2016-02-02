@@ -796,6 +796,27 @@ h6.variant-option-type strong.selection {
 .footer a {
 	color:#777777;
 }
+.social-icon {
+	margin: 0px 0px 0px 10px;
+}
+
+#instafeed img{
+	width: 100%;
+    margin: 10px 0px 0px 0px;
+}
+
+#instafeed .caption{
+	margin-top: 10px;
+}
+.icon svg {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+}
+.icon path {
+    fill: #828282;
+}
 #cart #main, #checkout, #order_summary{
 	max-width: 900px;
 	margin:0px auto !important;
