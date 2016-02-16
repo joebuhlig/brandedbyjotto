@@ -8,6 +8,9 @@ body {
 	position: relative;
 	font-size: 16px;
 }
+html, body{
+	height: 100%;
+}
 blockquote{
     border-left: 5px solid #b2bb1c;
 }
@@ -310,10 +313,71 @@ h3, h4, h5, h6 {
 	margin:0px;
 	width:100%;
 }
-.hero-image, .hero-image img{
-	width:100%;
+.hero-image {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
 }
-.arrow {
+.hero-image img{
+	width:100%;
+	margin-top: -150px;
+}
+.fly-in-steps{
+	background-color: #b2bb1c;
+    position: absolute;
+    bottom:0px;
+    color:#FFFFFF;
+    font-size: 16px;
+    width:100%;
+    line-height: 42px;
+    height: 42px;
+    display: none;
+}
+.fly-in-step{
+	float: left;
+	margin: 0px;
+	display: none;
+	width: 20%;
+	text-align: center;
+}
+.fly-in-step a{
+	color:#ffffff;
+	float: right;
+	text-align: center;
+	width: 100%;
+}
+
+@media (max-width: 1150px) {
+	.hero-image img{
+		margin-top: -100px;
+	}
+}
+@media (max-width: 1000px) {
+	.hero-image img{
+		margin-top: 0px;
+	}
+}
+@media (max-width: 800px) {
+	.hero-image{
+		height: auto;
+	}
+}
+@media (max-width: 800px) {
+	.fly-in-steps{
+		font-size: 14px;
+	    line-height: 35px;
+	    height: 35px;
+	}
+}
+@media (max-width: 500px) {
+	.fly-in-steps{
+		font-size: 12px;
+	    line-height: 30px;
+	    height: 30px;
+	}
+}
+/*.arrow {
     width: 0;
     left: 50%;
     bottom: 0;
@@ -332,7 +396,7 @@ h3, h4, h5, h6 {
     text-align: center;
     font: .75em 'Arial';
     bottom: 25px; left: -40px;
-}
+}*/
 
 @keyframes indicate {
       0% { bottom: 10% }

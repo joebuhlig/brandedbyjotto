@@ -17,27 +17,53 @@ $(document).on('page:change', function(event) {
     $(".size-chart-background").fadeOut();
     $(".size-chart-wrapper").fadeOut();
   });
+  if (!$(".navbar").hasClass("non-home")){
+    setTimeout(function(){
+      scrolled();
+      alignBottomNav();
+    }, 500);
+    $(window).resize(function(){
+      alignBottomNav();
+    })
+  }
 	$(window).scroll(function() {
-	    var topOfWindow = $(window).scrollTop() + $('.navbar').height() - 25;
-	    if (topOfContent < topOfWindow) {
-	        scrolled();
-          $('.arrow').fadeOut();
-	    }
-	    else {
-	    	unscrolled();
-	    };
+      if ($(".navbar").hasClass("non-home")){
+  	    var topOfWindow = $(window).scrollTop() + $('.navbar').height() - 25;
+  	    if (topOfContent < topOfWindow) {
+  	        scrolled();
+  	    }
+  	    else {
+  	    	unscrolled();
+  	    };
+      }
 	});
 	setTimeout(function(){
 		$(".alert").fadeOut();
 	}, 3500);
+  setTimeout(function(){
+    $(".fly-in-steps").fadeIn(750);
+  }, 1000);
+  setTimeout(function(){
+    $(".step-one").fadeIn(750);
+  }, 1000);
+  setTimeout(function(){
+    $(".step-two").fadeIn(750);
+  }, 1250);
+  setTimeout(function(){
+    $(".step-three").fadeIn(750);
+  }, 1500);
+  setTimeout(function(){
+    $(".step-four").fadeIn(750);
+  }, 1750);
+  setTimeout(function(){
+    $(".step-five").fadeIn(750);
+  }, 2000);
 	$(".thumbnail").click(function(){
 		$("#main-image img.product_image").attr('src', $(this).attr('src'));
 	});
 	$("#main-image img.product_image").click(function(){
 		var big_image_src = $(this).attr('src').toString();
-		console.log(big_image_src);
 		big_image_src = big_image_src.replace("large", "original");
-		console.log(big_image_src);
 		$(".image-zoom img").attr('src', big_image_src);
 		$(".image-zoom-original a").attr('href', big_image_src);
 		$(".image-zoom-background").fadeIn();
@@ -53,7 +79,6 @@ $(document).on('page:change', function(event) {
 
   $(".ad-hoc-option-select").on('change', function(){
     var selected = $(this).find(":selected").text().trim();
-    console.log(selected);
     switch(selected){
       case "Accomplishment":
         $("#card-image img").attr("src", "/images/accomplishment_card.jpg");
@@ -89,6 +114,9 @@ $(document).on('page:change', function(event) {
     };
   })
 
+  $("#cart-form form").submit(function(){
+    $("#product-customizations textarea").attr("disabled", false);
+  })
   var request = $.ajax({
         type: "GET",
         url: "https://crossorigin.me/https://www.instagram.com/branded_by_j.otto/"
@@ -106,14 +134,17 @@ $(document).on('page:change', function(event) {
         var caption = node.caption;
         $("#instafeed img").attr("src", src);
         $("#instafeed a").attr("href", "https://www.instagram.com/p/" + code);
-        $("#instafeed .caption").text(caption);
-        console.log(src);
-        console.log(code);
-        console.log(caption);
+        $("#instafeed .caption").text(caption)
       }
     })
   });
 });
+
+function alignBottomNav(){
+  var heroBottom = $('.hero-image').height();
+  heroBottom = heroBottom - parseInt($('.fly-in-steps').css('height'),10);
+  $('.fly-in-steps').css('top', heroBottom);
+}
 
 function scrolled() {
 	$(".navbar").addClass("scrolled", 750);
