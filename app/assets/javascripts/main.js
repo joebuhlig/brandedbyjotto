@@ -117,6 +117,14 @@ $(document).on('page:change', function(event) {
   $("#cart-form form").submit(function(){
     $("#product-customizations textarea").attr("disabled", false);
   })
+
+  $(".cycle-img-button.next-img").click(function(){
+    nextImage();
+  })
+  $(".cycle-img-button.prev-img").click(function(){
+    prevImage();
+  })
+
   var request = $.ajax({
         type: "GET",
         url: "https://crossorigin.me/https://www.instagram.com/branded_by_j.otto/"
@@ -139,6 +147,43 @@ $(document).on('page:change', function(event) {
     })
   });
 });
+
+function nextImage(){
+  productImage = $(".product_image").attr("src");
+  $(".thumbnail:visible").each(function(i){
+    thumbnailImage = $(this).attr("src");
+    if (productImage == thumbnailImage){
+      thumbnailCount = $(".thumbnail:visible").length;
+      if (thumbnailCount == i + 1){
+        setProductImageFromThumb(0);
+      }
+      else {
+        setProductImageFromThumb(i += 1);
+      }
+    }
+  })
+}
+
+function prevImage(){
+  productImage = $(".product_image").attr("src");
+  $(".thumbnail:visible").each(function(i){
+    thumbnailImage = $(this).attr("src");
+    if (productImage == thumbnailImage){
+      if (i == 0){
+        setProductImageFromThumb($(".thumbnail:visible").length - 1);
+      }
+      else{
+        setProductImageFromThumb(i - 1);
+      }
+    }
+  })
+}
+
+function setProductImageFromThumb(i){
+  newImage = $(".thumbnail:visible")[i];
+  newImage = $(newImage).attr("src");
+  $(".product_image").attr("src", newImage);
+}
 
 function alignBottomNav(){
   var heroBottom = $('.hero-image').height();

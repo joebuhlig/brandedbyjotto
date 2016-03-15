@@ -591,6 +591,25 @@ h3, h4, h5, h6 {
 	cursor:pointer;
     width: 100%;
 }
+#main-image .panel-body {
+    position: relative;
+}
+.cycle-img-button {
+    position: absolute;
+    top: 50%;
+}
+.cycle-img-button pre {
+    padding: 10px;
+    margin: 0px;
+    color:inherit;
+    background-color: inherit;
+    border: inherit;
+    font-size: 25px;
+    opacity: 0.3;
+}
+.cycle-img-button.next-img {
+    right: 0px;
+}
 .rate-name {
     color: #777;
     padding-left: 10px;
