@@ -26,6 +26,7 @@ $(document).on('page:change', function(event) {
       alignBottomNav();
     })
   }
+
 	$(window).scroll(function() {
       if ($(".navbar").hasClass("non-home")){
   	    var topOfWindow = $(window).scrollTop() + $('.navbar').height() - 25;
@@ -125,27 +126,6 @@ $(document).on('page:change', function(event) {
     prevImage();
   })
 
-  var request = $.ajax({
-        type: "GET",
-        url: "https://crossorigin.me/https://www.instagram.com/branded_by_j.otto/"
-  });
-  request.success(function(data){
-    scripts = $(data).filter('script');
-    $(scripts).each(function(index){
-      var myString = $(this).text();
-      if (myString.substr(0, 18) == "window._sharedData"){
-        $('#instafeed-script').html(myString);
-        eval($('#instafeed-script').html());
-        var node = _sharedData.entry_data.ProfilePage[0].user.media.nodes[0];
-        var src = node.display_src;
-        var code = node.code;
-        var caption = node.caption;
-        $("#instafeed img").attr("src", src);
-        $("#instafeed a").attr("href", "https://www.instagram.com/p/" + code);
-        $("#instafeed .caption").text(caption)
-      }
-    })
-  });
 });
 
 function nextImage(){
@@ -186,10 +166,26 @@ function setProductImageFromThumb(i){
 }
 
 function alignBottomNav(){
-  var heroBottom = $('.hero-image').height();
-  heroBottom = heroBottom - parseInt($('.fly-in-steps').css('height'),10);
-  $('.fly-in-steps').css('top', heroBottom);
+  // var heroBottom = $('.hero-image').height();
+  // heroBottom = heroBottom - parseInt($('.fly-in-steps').css('height'),10);
+  // $('.fly-in-steps').css('top', heroBottom);
 }
+
+var curHero = 1;
+var heroImageCNT = 4;
+var heroRotateTime = 3500;
+$(document).ready(function(){
+  $(".hero-image").slick({
+    speed: 200,
+    nextArrow: "",
+    previousArrow: "",
+    infinite: true,
+    pauseOnHover: false,
+    pauseOnDotsHover: true,
+    autoplay: true,
+    autoplaySpeed: 4500
+  });
+})
 
 function scrolled() {
 	$(".navbar").addClass("scrolled", 750);

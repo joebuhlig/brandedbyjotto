@@ -314,26 +314,18 @@ h3, h4, h5, h6 {
 	width:100%;
 }
 .hero-image {
+	height: 100%;
 	width: 100%;
-	margin-top: -45px;
 	overflow: hidden;
+	text-align: center;
 }
-@media (max-width: 950px) {
-	.hero-image {
-		margin-top: 0px;
-	}
-}
-@media (max-width: 751px) {
-	.hero-image{
-		height: auto;
-	}
-}
-.hero-image img {
-	width: 100%;
+.hero-image img{
+	width:100%;
+	margin-top: -150px;
 }
 .fly-in-steps{
 	background-color: #b2bb1c;
-    position: fixed;
+    position: absolute;
     bottom:0px;
     color:#FFFFFF;
     font-size: 16px;
@@ -341,7 +333,6 @@ h3, h4, h5, h6 {
     line-height: 42px;
     height: 42px;
     display: none;
-    z-index: 2;
 }
 .fly-in-step{
 	float: left;
@@ -357,6 +348,21 @@ h3, h4, h5, h6 {
 	width: 100%;
 }
 
+@media (max-width: 1150px) {
+	.hero-image img{
+		margin-top: -100px;
+	}
+}
+@media (max-width: 1000px) {
+	.hero-image img{
+		margin-top: 0px;
+	}
+}
+@media (max-width: 800px) {
+	.hero-image{
+		height: auto;
+	}
+}
 @media (max-width: 800px) {
 	.fly-in-steps{
 		font-size: 14px;
@@ -866,8 +872,6 @@ h6.variant-option-type strong.selection {
 	color:#777777;
 	width:100%;
 	margin: 0px !important;
-	z-index: 1;
-	padding-bottom: 45px;
 }
 .footer h1, .footer h2, .footer h3, .footer h4, .footer h5, .footer h6 {
 	color: #dddddd;
@@ -879,7 +883,12 @@ h6.variant-option-type strong.selection {
 	margin: 0px 0px 0px 10px;
 }
 
-#instafeed{
+#instafeed img{
+	width: 100%;
+    margin: 10px 0px 0px 0px;
+}
+
+#instafeed .caption{
 	margin-top: 10px;
 }
 .icon svg {
@@ -932,3 +941,20 @@ h6.variant-option-type strong.selection {
 	margin: 25px 0px;
 	width: 100%;
 }
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ #= require_main
+ */
+

@@ -16,4 +16,5 @@
 //= require jquery-ui
 //= require turbolinks
 //= require_tree .
+//= require slick/slick
 //= require main
