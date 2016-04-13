@@ -315,17 +315,24 @@ h3, h4, h5, h6 {
 }
 .hero-image {
 	width: 100%;
-	margin-top: -45px;
+	height: 100%;
+	margin-top: -40px;
 	overflow: hidden;
 }
-@media (max-width: 950px) {
+.slideme{
+	height: 100%;
+	width: 100%;
+	max-height: 1300px;
+	max-width: 1500px;
+}
+@media (max-width: 1250px) {
 	.hero-image {
 		margin-top: 0px;
 	}
 }
 @media (max-width: 751px) {
 	.hero-image{
-		height: auto;
+		margin-top: 50px;
 	}
 }
 .hero-image img {
@@ -341,7 +348,7 @@ h3, h4, h5, h6 {
     line-height: 42px;
     height: 42px;
     display: none;
-    z-index: 2;
+    z-index: 20;
 }
 .fly-in-step{
 	float: left;

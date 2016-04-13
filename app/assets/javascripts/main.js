@@ -20,9 +20,11 @@ $(document).on('page:change', function(event) {
   if (!$(".navbar").hasClass("non-home")){
     setTimeout(function(){
       scrolled();
+      setHeroHeight();
       alignBottomNav();
     }, 500);
     $(window).resize(function(){
+      setHeroHeight();
       alignBottomNav();
     })
   }
@@ -170,20 +172,23 @@ function alignBottomNav(){
   // heroBottom = heroBottom - parseInt($('.fly-in-steps').css('height'),10);
   // $('.fly-in-steps').css('top', heroBottom);
 }
+function setHeroHeight(){
+  $(".hero-image").height($(".slideme .current img").height());
+}
 
 var curHero = 1;
 var heroImageCNT = 4;
 var heroRotateTime = 3500;
 $(document).ready(function(){
-  $(".hero-image").slick({
-    speed: 200,
-    nextArrow: "",
-    previousArrow: "",
-    infinite: true,
-    pauseOnHover: false,
-    pauseOnDotsHover: true,
-    autoplay: true,
-    autoplaySpeed: 4500
+  $('.hero-image').slideme({
+    arrows: true,
+    autoslide: true,
+    autoslideHoverStop: false,
+    interval: 7500,
+    loop: true,
+    pagination: "numbers",
+    transition : 'zoom',
+    itemsForSlide: 0
   });
 })
 
