@@ -184,7 +184,7 @@ $(document).ready(function(){
     arrows: true,
     autoslide: true,
     autoslideHoverStop: false,
-    interval: 7500,
+    interval: 5250,
     loop: true,
     pagination: "numbers",
     transition : 'zoom',
