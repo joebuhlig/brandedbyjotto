@@ -1,4 +1,4 @@
-$(document).on('page:change', function(event) {
+$(document).on('ready page:change turbolinks:load', function(event) {
 
 	var topOfContent = $(".navbar").height();
 	$(".spinner-wrapper").hide();
